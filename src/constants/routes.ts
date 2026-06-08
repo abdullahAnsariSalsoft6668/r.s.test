@@ -1,0 +1,47 @@
+const routes = {
+  auth: {
+    login: 'Login',
+    forgot: 'Forgot',
+    forgotVerifyOtp: 'ForgotVerifyOtp',
+    forgotResetPassword: 'ForgotResetPassword',
+    onboarding: 'Onboarding',
+    register: 'Register',
+    completeProfile: 'CompleteProfile',
+  },
+  main: {
+    settings: 'Settings',
+    editProfile: 'EditProfile',
+    changePassword: 'ChangePassword',
+    subscription: 'Subscription',
+    manageSubscriptions: 'ManageSubscriptions',
+    paymentMethod: 'PaymentMethod',
+    help: 'Help',
+    support: 'Support',
+    cardDetails: 'CardDetails',
+    helpAndCenter: 'HelpAndCenter',
+    profileDetails: 'ProfileDetails',
+    profile: 'Profile',
+    notification: 'Notification',
+    checkout: 'Checkout',
+    mybets: 'Mybets',
+    workHistory: 'WorkHistory',
+    wageOverview: 'WageOverview',
+    myProfile: 'MyProfile',
+    setting: 'Setting',
+    helpSupport: 'HelpSupport',
+  },
+  tab: {
+    home: 'Home',
+    transactions: 'Transactions',
+    donate: 'Donate',
+    analytics: 'Analytics',
+    profile: 'ProfileTab',
+  },
+  navigator: {
+    auth: 'Auth',
+    main: 'Main',
+    tab: 'Tabs',
+  },
+} as const;
+
+export default routes;
