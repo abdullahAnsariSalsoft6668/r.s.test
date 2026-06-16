@@ -25,7 +25,8 @@
         }
     },
     "include": [
-        "*.ts"
+        "*.ts",
+        "figma/**/*.ts"
     ],
     "exclude": [
         "node_modules",

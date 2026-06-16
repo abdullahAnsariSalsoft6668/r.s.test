@@ -23,6 +23,7 @@ import Fail from '@/assets/icons/fail.svg';
 import Filter from '@/assets/icons/filter.svg';
 import HomeActive from '@/assets/icons/home-active.svg';
 import Home from '@/assets/icons/home.svg';
+import Icon from '@/assets/icons/icon.svg';
 import Notification from '@/assets/icons/notification.svg';
 import Placeholder from '@/assets/icons/placeholder.svg';
 import RightArrow from '@/assets/icons/right-arrow.svg';
@@ -64,6 +65,7 @@ export type IconName =
   | 'filter'
   | 'homeActive'
   | 'home'
+  | 'icon'
   | 'notification'
   | 'placeholder'
   | 'rightArrow'
@@ -107,6 +109,7 @@ const iconMap: Record<IconName, IconComponent> = {
   filter: Filter,
   homeActive: HomeActive,
   home: Home,
+  icon: Icon,
   notification: Notification,
   placeholder: Placeholder,
   rightArrow: RightArrow,

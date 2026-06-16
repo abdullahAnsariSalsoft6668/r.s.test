@@ -1,0 +1,28 @@
+Scope of the product that I want to build,
+
+
+User can add their multiple incomes:
+
+1- Like softwarre dev salary, part time job salary, freelance or other any salary so here I need a custom salary category add feature user can I add category about salary type.
+
+2- User can add thier expenses, Like he put petrol on his vehicle, or buy a burger, or other stuff. also he has a option to add his expense using upload the receipt image or just directly add the price and expense thing name or type
+
+3- User can donate everymonth certer amount of percentage into a total monthly income of his. like 5%, 10% any percentage he can edit it accordingly.
+
+4- User can check the progress of the donation amount like how much he give or like suppose his total salary amount 10k and the 5% suppose 500 then suppose he would donate 50 to relative 1, 100 friend ref, and also other amount to other one. Also he can add the person on the app that person are needy. also type of the person like relative or etc. Also on the app show you need to donate 50 more than your montly donate target fullfilled using ai or manual
+
+5- Also the app algorithm check if he need to give zakat and sadqa he also maintained this.
+
+6- App show also all analytics like how much he spend previous month, how much savings, this month how much donate.
+
+
+So this are the basic feature of the app, Now ai you can review my features and let me know how it is? Or also you can add more feature if there is any need or you can elaborate my features, also,
+
+Make a SRD, and screen wise features list and flow. Or if in this project any need of ai that increase the chance of this app to more powerful that also suggest me.
+
+And let me know about which feature need to paid that will help me to generate the passive income.
+
+
+
+
+

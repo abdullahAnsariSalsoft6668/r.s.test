@@ -1,64 +1,53 @@
 /**
  * AUTO ICON GENERATOR By Abdullah Ansari
  * Scans src/assets/icons/*.svg
- * Regenerates src/components/MyIcons/index.tsx
+ * Regenerates src/components/MyIcons.tsx
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
 import * as chokidar from 'chokidar';
+import { toCamelCase, toPascalCase } from './figma/naming';
 
 /* ----------------------------------
    CONFIG
 ----------------------------------- */
 
-const ICONS_DIR = path.resolve(__dirname, '../assets/icons');
-const OUTPUT_FILE = path.resolve(
-  __dirname,
-  '../components/MyIcons.tsx'
-);
+export const ICONS_DIR = path.resolve(__dirname, '../assets/icons');
+export const MY_ICONS_OUTPUT = path.resolve(__dirname, '../components/MyIcons.tsx');
 
 const isWatchMode = process.argv.includes('--watch');
-
-/* ----------------------------------
-   HELPERS
------------------------------------ */
-
-const toCamelCase = (name: string): string =>
-  name
-    .replace(/[-_](.)/g, (_, g1) => g1.toUpperCase())
-    .replace(/^(.)/, (m) => m.toLowerCase());
-
-const toPascalCase = (name: string): string =>
-  name
-    .replace(/(^\w|-\w)/g, (m) => m.replace('-', '').toUpperCase());
+const isDirectRun = require.main === module;
 
 /* ----------------------------------
    GENERATOR
 ----------------------------------- */
 
-function generateIcons(): void {
+export function generateIcons(): void {
   if (!fs.existsSync(ICONS_DIR)) {
-    console.error('❌ Icons directory not found:', ICONS_DIR);
-    return;
+    fs.mkdirSync(ICONS_DIR, { recursive: true });
   }
 
   const files = fs
     .readdirSync(ICONS_DIR)
-    .filter((f) => f.endsWith('.svg'));
+    .filter(f => f.endsWith('.svg'))
+    .sort();
+
+  if (files.length === 0) {
+    console.warn('⚠️ No SVG files found in', ICONS_DIR);
+    return;
+  }
 
   const imports: string[] = [];
   const mapEntries: string[] = [];
   const iconNames: string[] = [];
 
-  files.forEach((file) => {
+  files.forEach(file => {
     const baseName = file.replace('.svg', '');
     const iconName = toCamelCase(baseName);
     const componentName = toPascalCase(baseName);
 
-    imports.push(
-      `import ${componentName} from '@/assets/icons/${file}';`
-    );
+    imports.push(`import ${componentName} from '@/assets/icons/${file}';`);
 
     mapEntries.push(`  ${iconName}: ${componentName},`);
     iconNames.push(`  | '${iconName}'`);
@@ -122,7 +111,7 @@ export { iconMap };
 export default MyIcons;
 `;
 
-  fs.writeFileSync(OUTPUT_FILE, content, 'utf8');
+  fs.writeFileSync(MY_ICONS_OUTPUT, content, 'utf8');
   console.log(`✅ MyIcons generated (${files.length} icons)`);
 }
 
@@ -130,17 +119,15 @@ export default MyIcons;
    RUN
 ----------------------------------- */
 
-generateIcons();
+if (isDirectRun) {
+  generateIcons();
 
-/* ----------------------------------
-   WATCH MODE
------------------------------------ */
-
-if (isWatchMode) {
-  console.log('👀 Watching icons folder...');
-  chokidar
-    .watch(ICONS_DIR, { ignoreInitial: true })
-    .on('add', generateIcons)
-    .on('unlink', generateIcons)
-    .on('change', generateIcons);
+  if (isWatchMode) {
+    console.log('👀 Watching icons folder...');
+    chokidar
+      .watch(ICONS_DIR, { ignoreInitial: true })
+      .on('add', generateIcons)
+      .on('unlink', generateIcons)
+      .on('change', generateIcons);
+  }
 }
