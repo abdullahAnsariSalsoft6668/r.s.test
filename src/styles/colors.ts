@@ -1,12 +1,13 @@
 import { palette } from '@/styles/palette';
 
 export const Colors = {
-    // Brand Colors (Ultimate Grocery homepage palette)
-    primary: palette.purple.main,
+    // RizqShare brand — emerald primary; legacy purple kept for older screens
+    primary: palette.emerald.main,
     pink: '#FCE7F3',
-    secondary: palette.magenta.stat,
-    darkBlue: '#101f35',
+    secondary: palette.teal.main,
+    darkBlue: palette.emerald.dark,
     brandPurple: palette.purple.main,
+    brandEmerald: palette.emerald.main,
 
     brandSalmon: '#FF8C69',
     glassSurface: 'rgba(255, 255, 255, 0.2)',
@@ -23,10 +24,10 @@ export const Colors = {
     onboardingGlassBorder: 'rgba(255, 255, 255, 0.2)',
     onboardingDotInactive: 'rgba(255, 255, 255, 0.35)',
 
-    // Tabs — white bar, purple active (homepage design)
+    // Tabs — white bar, emerald active (RizqShare design)
     tabPrimary: palette.neutral.white,
     tabSecondary: palette.neutral.white,
-    tabActive: palette.purple.main,
+    tabActive: palette.emerald.main,
     tabInactive: palette.neutral.textMuted,
 
     // Status Colors

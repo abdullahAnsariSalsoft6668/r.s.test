@@ -12,6 +12,13 @@
 		72EF40071FF2338A39FAF22F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		58E37AB1241C4248A77A5CD7 /* BrittiSansTrial-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */; };
+		14918335BEEF4EEEBDE1A4AF /* BrittiSansTrial-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */; };
+		E14E78BFFB3140789C751B2D /* PlusJakartaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */; };
+		28A7F51E965F42D3B52973B9 /* Nasalization-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */; };
+		AB7CB74E5FB44A3797FFE28E /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3C5501883F94DD19714F54C /* PlusJakartaSans-Bold.ttf */; };
+		B4A3328BD45F48559287A02C /* PlusJakartaSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */; };
+		ABFD8CE81FD44AD5B38BE6BD /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 3D62F6107C364063AFBD82FF /* index.ts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +32,13 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = UltimateGrocery/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "UltimateGrocery/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */ = {isa = PBXFileReference; name = "BrittiSansTrial-Semibold.otf"; path = "../src/assets/fonts/BrittiSansTrial-Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */ = {isa = PBXFileReference; name = "BrittiSansTrial-Regular.otf"; path = "../src/assets/fonts/BrittiSansTrial-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Regular.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */ = {isa = PBXFileReference; name = "Nasalization-Regular.ttf"; path = "../src/assets/fonts/Nasalization-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B3C5501883F94DD19714F54C /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Bold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-ExtraBold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3D62F6107C364063AFBD82FF /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../src/assets/fonts/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +89,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				31E08ADFF1D94CA9B413406E /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -97,6 +112,21 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		31E08ADFF1D94CA9B413406E /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */,
+				D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */,
+				377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */,
+				94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */,
+				B3C5501883F94DD19714F54C /* PlusJakartaSans-Bold.ttf */,
+				BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */,
+				3D62F6107C364063AFBD82FF /* index.ts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -162,6 +192,13 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				72EF40071FF2338A39FAF22F /* PrivacyInfo.xcprivacy in Resources */,
+				58E37AB1241C4248A77A5CD7 /* BrittiSansTrial-Semibold.otf in Resources */,
+				14918335BEEF4EEEBDE1A4AF /* BrittiSansTrial-Regular.otf in Resources */,
+				E14E78BFFB3140789C751B2D /* PlusJakartaSans-Regular.ttf in Resources */,
+				28A7F51E965F42D3B52973B9 /* Nasalization-Regular.ttf in Resources */,
+				AB7CB74E5FB44A3797FFE28E /* PlusJakartaSans-Bold.ttf in Resources */,
+				B4A3328BD45F48559287A02C /* PlusJakartaSans-ExtraBold.ttf in Resources */,
+				ABFD8CE81FD44AD5B38BE6BD /* index.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +313,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "UltimateGrocery/Info.plist";
-             INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Grocery";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Grocery";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -307,7 +344,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = "UltimateGrocery/Info.plist";
-             INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Grocery";
+				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Grocery";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

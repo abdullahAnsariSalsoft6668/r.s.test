@@ -1,7 +1,7 @@
 import { getFirstName } from '@/components/HomeHeader';
 import MyIcons from '@/components/MyIcons';
 import TextComp from '@/components/TextComp';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { useDrawerSafe } from '@/context/DrawerContext';
 import { navigateToAlertsTab } from '@/navigation/navigateToAlerts';
 import { useEntranceAnimation } from '@/hooks/animations/useEntranceAnimation';

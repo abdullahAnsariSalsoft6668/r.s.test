@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import {
     SharedValue,
     useSharedValue,
     withTiming,
     runOnJS,
 } from 'react-native-reanimated';
+
+import { useSelector } from '@/redux/hooks';
 
 interface DrawerContextType {
     isOpen: boolean;
@@ -29,6 +31,12 @@ export const useDrawerSafe = () => useContext(DrawerContext);
 export const DrawerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const progress = useSharedValue(0);
+    const locale = useSelector((state) => state.settings.defaultLanguage.sortName);
+
+    useEffect(() => {
+        setIsOpen(false);
+        progress.value = 0;
+    }, [locale, progress]);
 
     const open = useCallback(() => {
         setIsOpen(true);

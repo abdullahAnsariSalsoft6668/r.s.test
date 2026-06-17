@@ -4,7 +4,7 @@ import HeaderComp from '@/components/HeaderComp';
 import MyIcons, { IconName } from '@/components/MyIcons';
 import TextComp from '@/components/TextComp';
 import WrapperContainer from '@/components/WrapperContainer';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { MainStackParamList } from '@/navigation/types';
 import { clearDataAction } from '@/redux/actions/auth';
 import { Colors } from '@/styles/colors';

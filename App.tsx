@@ -3,13 +3,15 @@
  * @description Root application component that initializes core app functionality
  * including Redux store, navigation, and native splash (react-native-splash-screen).
  */
+import '@/lang';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { requestUserPermission } from '@/helper/notifciationService';
 import Routes from '@/navigation/Routes';
 import store from '@/redux/store';
 import { getLocalItem } from '@/utils/checkStorage';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { I18nManager, StyleSheet } from 'react-native';
+import { ThemeProvider } from '@/context/ThemeContext';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
@@ -24,11 +26,6 @@ import Toast from 'react-native-toast-message';
  */
 const App = () => {
   const [isStorageReady, setIsStorageReady] = useState(false);
-
-  useLayoutEffect(() => {
-    I18nManager.allowRTL(false);
-    I18nManager.forceRTL(false);
-  }, []);
 
   useEffect(() => {
     const init = async () => {
@@ -51,18 +48,20 @@ const App = () => {
   return (
     <GestureHandlerRootView style={styles.container}>
       <SafeAreaProvider>
-        <ErrorBoundary>
-          <Provider store={store}>
-            {isStorageReady ? <Routes /> : null}
-            <Toast
-              config={appToastConfig}
-              position="top"
-              visibilityTime={3800}
-              topOffset={52}
-              swipeable
-            />
-          </Provider>
-        </ErrorBoundary>
+        <Provider store={store}>
+          <ThemeProvider>
+            <ErrorBoundary>
+              {isStorageReady ? <Routes /> : null}
+              <Toast
+                config={appToastConfig}
+                position="top"
+                visibilityTime={3800}
+                topOffset={52}
+                swipeable
+              />
+            </ErrorBoundary>
+          </ThemeProvider>
+        </Provider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

@@ -1,6 +1,6 @@
 import TextComp from '@/components/TextComp';
 import MyIcons from '@/components/MyIcons';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { useEntranceAnimation } from '@/hooks/animations/useEntranceAnimation';
 import { usePressScale } from '@/hooks/animations/usePressScale';
 import { plusJakarta } from '@/assets/fonts';

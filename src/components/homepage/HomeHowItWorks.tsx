@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import TextComp from '@/components/TextComp';
 import { HOME_STEPS } from '@/components/homepage/constants';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { navigateMainStack } from '@/navigation/navigateMainStack';
 import { homeStyles } from '@/styles/homeStyles';
 

@@ -56,6 +56,19 @@ import PlayIcon from '@/assets/icons/play-icon.svg';
 import RightArrow from '@/assets/icons/right-arrow.svg';
 import RightChevron from '@/assets/icons/right-chevron.svg';
 import RigjhtArrow from '@/assets/icons/rigjht-arrow.svg';
+import RizqIconSettings from '@/assets/icons/rizq-icon-settings.svg';
+import RizqIconUsersWhite from '@/assets/icons/rizq-icon-users-white.svg';
+import RizqTabChartActive from '@/assets/icons/rizq-tab-chart-active.svg';
+import RizqTabChart from '@/assets/icons/rizq-tab-chart.svg';
+import RizqTabHeartActive from '@/assets/icons/rizq-tab-heart-active.svg';
+import RizqTabHeartFab from '@/assets/icons/rizq-tab-heart-fab.svg';
+import RizqTabHeart from '@/assets/icons/rizq-tab-heart.svg';
+import RizqTabHomeActive from '@/assets/icons/rizq-tab-home-active.svg';
+import RizqTabHome from '@/assets/icons/rizq-tab-home.svg';
+import RizqTabListActive from '@/assets/icons/rizq-tab-list-active.svg';
+import RizqTabList from '@/assets/icons/rizq-tab-list.svg';
+import RizqTabUserActive from '@/assets/icons/rizq-tab-user-active.svg';
+import RizqTabUser from '@/assets/icons/rizq-tab-user.svg';
 import Success from '@/assets/icons/success.svg';
 import SupportActive from '@/assets/icons/support-active.svg';
 import SupportStore from '@/assets/icons/support-store.svg';
@@ -131,6 +144,19 @@ export type IconName =
   | 'rightArrow'
   | 'rightChevron'
   | 'rigjhtArrow'
+  | 'rizqIconSettings'
+  | 'rizqIconUsersWhite'
+  | 'rizqTabChartActive'
+  | 'rizqTabChart'
+  | 'rizqTabHeartActive'
+  | 'rizqTabHeartFab'
+  | 'rizqTabHeart'
+  | 'rizqTabHomeActive'
+  | 'rizqTabHome'
+  | 'rizqTabListActive'
+  | 'rizqTabList'
+  | 'rizqTabUserActive'
+  | 'rizqTabUser'
   | 'success'
   | 'supportActive'
   | 'supportStore'
@@ -208,6 +234,19 @@ const iconMap: Record<IconName, IconComponent> = {
   rightArrow: RightArrow,
   rightChevron: RightChevron,
   rigjhtArrow: RigjhtArrow,
+  rizqIconSettings: RizqIconSettings,
+  rizqIconUsersWhite: RizqIconUsersWhite,
+  rizqTabChartActive: RizqTabChartActive,
+  rizqTabChart: RizqTabChart,
+  rizqTabHeartActive: RizqTabHeartActive,
+  rizqTabHeartFab: RizqTabHeartFab,
+  rizqTabHeart: RizqTabHeart,
+  rizqTabHomeActive: RizqTabHomeActive,
+  rizqTabHome: RizqTabHome,
+  rizqTabListActive: RizqTabListActive,
+  rizqTabList: RizqTabList,
+  rizqTabUserActive: RizqTabUserActive,
+  rizqTabUser: RizqTabUser,
   success: Success,
   supportActive: SupportActive,
   supportStore: SupportStore,

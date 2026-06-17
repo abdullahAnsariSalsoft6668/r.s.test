@@ -1,0 +1,33 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/BrittiSansTrial-Regular.otf",
+      "sha1": "6ff8834c6802ab775d69d1f08eec20dcef150631"
+    },
+    {
+      "path": "src/assets/fonts/BrittiSansTrial-Semibold.otf",
+      "sha1": "93a10ba9293559d679c3e04f3200e0c7ed1120f7"
+    },
+    {
+      "path": "src/assets/fonts/index.ts",
+      "sha1": "921578b032fb0e3107c072cb5139df53589a00e4"
+    },
+    {
+      "path": "src/assets/fonts/Nasalization-Regular.ttf",
+      "sha1": "c13f154aa1798bb08ec96029ac2465d3a897caeb"
+    },
+    {
+      "path": "src/assets/fonts/PlusJakartaSans-Bold.ttf",
+      "sha1": "65d4478e92a9ff9298b748f8088e05972cd18697"
+    },
+    {
+      "path": "src/assets/fonts/PlusJakartaSans-ExtraBold.ttf",
+      "sha1": "91df94a9ed290d7aebbc5f5118d91fda38f9c109"
+    },
+    {
+      "path": "src/assets/fonts/PlusJakartaSans-Regular.ttf",
+      "sha1": "25ba6345e577fa516ad5f89405933171a8d81eb0"
+    }
+  ]
+}

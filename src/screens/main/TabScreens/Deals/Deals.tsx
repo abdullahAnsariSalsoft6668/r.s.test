@@ -22,7 +22,7 @@ import {
 } from '@/components/deals';
 import type { DealItem } from '@/components/grocery/types';
 import WrapperContainer from '@/components/WrapperContainer';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { navigateMainStack } from '@/navigation/navigateMainStack';
 import { tabScreenStyles } from '@/styles/tabScreenStyles';
 import { theme } from '@/styles/theme';

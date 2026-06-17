@@ -1,5 +1,5 @@
 import TextComp from '@/components/TextComp';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { navigateToAlertsTab } from '@/navigation/navigateToAlerts';
 import { useEntranceAnimation } from '@/hooks/animations/useEntranceAnimation';
 import { usePressScale } from '@/hooks/animations/usePressScale';

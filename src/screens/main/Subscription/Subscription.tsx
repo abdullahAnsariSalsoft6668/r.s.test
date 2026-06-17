@@ -10,7 +10,7 @@ import React, { useCallback, useMemo } from 'react';
 import { ScrollView, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styles from './styles';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
 
 const STAGGER_DELAY = 70;

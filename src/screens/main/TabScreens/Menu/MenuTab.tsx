@@ -12,7 +12,7 @@ import {
     MenuFeatureRow,
 } from '@/components/menu';
 import WrapperContainer from '@/components/WrapperContainer';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { tabScreenStyles } from '@/styles/tabScreenStyles';
 import { theme } from '@/styles/theme';
 import { moderateScale } from '@/styles/scaling';
@@ -26,7 +26,7 @@ const MenuTab: React.FC = () => {
         (route?: (typeof MENU_FEATURES)[number]['route']) => {
             switch (route) {
                 case 'insights':
-                    navigation.navigate(routes.tab.insights);
+                    navigation.navigate(routes.tab.analytics);
                     break;
                 case 'helpHowItWorks':
                     navigation.getParent()?.navigate(routes.main.helpHowItWorks as never);

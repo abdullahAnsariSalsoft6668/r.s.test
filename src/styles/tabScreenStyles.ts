@@ -4,30 +4,47 @@ import { theme } from '@/styles/theme';
 import { moderateScale } from '@/styles/scaling';
 import { spaces } from '@/styles/sizes';
 
-/** Shared layout styles for purple-header tab screens (Deals, Cashback, Insights). */
+/** Shared layout styles for RizqShare tab screens. */
 export const tabScreenStyles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: theme.colors.background.primary,
+        backgroundColor: theme.colors.background.secondary,
     },
     scrollView: {
         flex: 1,
-        backgroundColor: theme.colors.background.primary,
+        backgroundColor: theme.colors.background.secondary,
     },
     scrollContent: {
         flexGrow: 1,
         paddingBottom: moderateScale(120),
     },
     hero: {
-        backgroundColor: theme.colors.background.header,
         paddingHorizontal: spaces.medium,
-        paddingBottom: moderateScale(28),
+        paddingBottom: moderateScale(32),
         overflow: 'hidden',
         position: 'relative',
     },
-    heroGrid: {
+    heroPattern: {
         ...StyleSheet.absoluteFill,
         zIndex: 0,
+    },
+    heroOrbLarge: {
+        position: 'absolute',
+        top: -moderateScale(40),
+        right: -moderateScale(30),
+        width: moderateScale(160),
+        height: moderateScale(160),
+        borderRadius: moderateScale(80),
+        backgroundColor: 'rgba(255, 255, 255, 0.06)',
+    },
+    heroOrbSmall: {
+        position: 'absolute',
+        bottom: moderateScale(20),
+        left: -moderateScale(20),
+        width: moderateScale(90),
+        height: moderateScale(90),
+        borderRadius: moderateScale(45),
+        backgroundColor: 'rgba(201, 162, 39, 0.12)',
     },
     heroContent: {
         position: 'relative',
@@ -50,39 +67,43 @@ export const tabScreenStyles = StyleSheet.create({
     pageTitle: {
         ...theme.typography.h1,
         color: theme.colors.text.inverse,
-        fontSize: moderateScale(26),
-        lineHeight: moderateScale(32),
+        fontSize: moderateScale(24),
+        lineHeight: moderateScale(30),
+        letterSpacing: -0.3,
     },
     pageSubtitle: {
         ...theme.typography.body,
-        color: 'rgba(255, 255, 255, 0.88)',
-        marginTop: moderateScale(4),
+        color: 'rgba(255, 255, 255, 0.78)',
+        marginTop: moderateScale(6),
+        fontSize: moderateScale(14),
+        lineHeight: moderateScale(20),
     },
     heroAction: {
-        width: moderateScale(36),
-        height: moderateScale(36),
-        borderRadius: moderateScale(18),
-        backgroundColor: 'rgba(255, 255, 255, 0.16)',
+        width: moderateScale(40),
+        height: moderateScale(40),
+        borderRadius: moderateScale(20),
+        backgroundColor: 'rgba(255, 255, 255, 0.14)',
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.22)',
+        borderColor: 'rgba(255, 255, 255, 0.2)',
     },
     bodySheet: {
-        backgroundColor: theme.colors.background.primary,
+        backgroundColor: theme.colors.background.secondary,
         borderTopLeftRadius: moderateScale(28),
         borderTopRightRadius: moderateScale(28),
-        marginTop: -moderateScale(22),
+        marginTop: -moderateScale(24),
         paddingHorizontal: spaces.medium,
         paddingTop: spaces.large,
         paddingBottom: spaces.medium,
-        ...theme.shadows.card,
     },
     card: {
         backgroundColor: theme.colors.card.background,
         borderRadius: theme.radius.lg,
         padding: spaces.medium,
         marginBottom: spaces.medium,
+        borderWidth: 1,
+        borderColor: theme.colors.border.subtle,
         ...theme.shadows.card,
     },
     sectionBlock: {

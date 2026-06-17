@@ -1,4 +1,6 @@
 /* eslint-disable */
+import '@/api/financeApi';
+import { baseApi } from "@/api/baseApi";
 import { authApi } from "@/api/authApiSlice";
 import { cartApi } from "@/api/cartApiSlice";
 import { checkoutApi } from "@/api/checkoutApiSlice";
@@ -15,6 +17,7 @@ const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
+            baseApi.middleware,
             authApi.middleware,
             childApi.middleware,
             cartApi.middleware,

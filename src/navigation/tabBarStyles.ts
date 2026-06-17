@@ -1,57 +1,68 @@
 import { Platform, StyleSheet } from 'react-native';
 
 import { plusJakarta } from '@/assets/fonts';
-import { palette } from '@/styles/palette';
 import { theme } from '@/styles/theme';
 import { moderateScale } from '@/styles/scaling';
 
-export const TAB_ICON_SIZE = moderateScale(24);
-export const TAB_INACTIVE_COLOR = '#7C889D';
-export const TAB_ACTIVE_COLOR = palette.purple.main;
+export const TAB_ICON_SIZE = moderateScale(22);
+export const TAB_ACTIVE_COLOR = theme.colors.tab.active;
+export const TAB_INACTIVE_COLOR = theme.colors.tab.inactive;
 
 export const tabBarStyles = StyleSheet.create({
     outer: {
         position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: theme.colors.tab.background,
-        borderTopWidth: StyleSheet.hairlineWidth,
-        borderTopColor: palette.neutral.gray100,
-        ...Platform.select({
-            ios: {
-                shadowColor: '#000000',
-                shadowOffset: { width: 0, height: -2 },
-                shadowOpacity: 0.06,
-                shadowRadius: 8,
-            },
-            android: {
-                elevation: 8,
-            },
-            default: {},
-        }),
+        left: moderateScale(12),
+        right: moderateScale(12),
+        bottom: moderateScale(8),
+        backgroundColor: 'transparent',
     },
     bar: {
         backgroundColor: theme.colors.tab.background,
-        paddingTop: moderateScale(10),
-        paddingBottom: moderateScale(4),
+        borderRadius: moderateScale(22),
+        paddingTop: moderateScale(8),
+        paddingBottom: moderateScale(6),
+        borderWidth: 1,
+        borderColor: theme.colors.border.subtle,
+        ...Platform.select({
+            ios: {
+                shadowColor: theme.palette.emerald.dark,
+                shadowOffset: { width: 0, height: 8 },
+                shadowOpacity: 0.12,
+                shadowRadius: 20,
+            },
+            android: {
+                elevation: 12,
+            },
+            default: {},
+        }),
     },
     tabsRow: {
         flexDirection: 'row',
         alignItems: 'flex-end',
         justifyContent: 'space-between',
-        paddingHorizontal: moderateScale(8),
+        paddingHorizontal: moderateScale(6),
     },
     tabItem: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: moderateScale(4),
-        minWidth: moderateScale(56),
-        gap: moderateScale(5),
+        paddingVertical: moderateScale(6),
+        minWidth: moderateScale(52),
+        gap: moderateScale(4),
+        borderRadius: moderateScale(16),
+    },
+    tabItemActive: {
+        backgroundColor: theme.colors.tab.pill,
+    },
+    activeDot: {
+        width: moderateScale(4),
+        height: moderateScale(4),
+        borderRadius: moderateScale(2),
+        backgroundColor: theme.colors.brand.accent,
+        marginBottom: moderateScale(2),
     },
     tabLabel: {
-        fontSize: moderateScale(11),
+        fontSize: moderateScale(10),
         fontFamily: plusJakarta.regular,
         textAlign: 'center',
     },
@@ -61,5 +72,27 @@ export const tabBarStyles = StyleSheet.create({
     },
     tabLabelInactive: {
         color: TAB_INACTIVE_COLOR,
+    },
+    donateTabItem: {
+        marginTop: -moderateScale(6),
+    },
+    donateCircle: {
+        width: moderateScale(44),
+        height: moderateScale(44),
+        borderRadius: moderateScale(22),
+        backgroundColor: theme.colors.brand.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: moderateScale(2),
+        ...Platform.select({
+            ios: {
+                shadowColor: theme.palette.emerald.dark,
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.25,
+                shadowRadius: 8,
+            },
+            android: { elevation: 6 },
+            default: {},
+        }),
     },
 });

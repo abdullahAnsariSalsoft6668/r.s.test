@@ -1,6 +1,6 @@
 import TextComp from '@/components/TextComp';
 import MyIcons from '@/components/MyIcons';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { navigateToAlertsTab } from '@/navigation/navigateToAlerts';
 import DrawerScreenBackButton from '@/components/drawer/DrawerScreenBackButton';
 import { useEntranceAnimation } from '@/hooks/animations/useEntranceAnimation';

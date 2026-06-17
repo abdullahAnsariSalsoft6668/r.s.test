@@ -1,6 +1,6 @@
 // import { useResetPassMutation } from '@/api/resetPassApiSlice';
 import AuthPromptRow from '@/components/AuthPromptRow';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import type { AuthStackParamList } from '@/navigation/types';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';

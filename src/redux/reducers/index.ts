@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { baseApi } from "@/api/baseApi";
 import { authApi } from "@/api/authApiSlice";
 import { cartApi } from "@/api/cartApiSlice";
 import { checkoutApi } from "@/api/checkoutApiSlice";
@@ -24,6 +25,7 @@ export interface RootState {
   [reviewsApi.reducerPath]: ReturnType<typeof reviewsApi.reducer>;
   [checkoutApi.reducerPath]: ReturnType<typeof checkoutApi.reducer>;
   [resetApi.reducerPath]: ReturnType<typeof resetApi.reducer>;
+  [baseApi.reducerPath]: ReturnType<typeof baseApi.reducer>;
 }
 const appReducer = combineReducers({
   auth,
@@ -37,6 +39,7 @@ const appReducer = combineReducers({
   [reviewsApi.reducerPath]: reviewsApi.reducer,
   [checkoutApi.reducerPath]: checkoutApi.reducer,
   [resetApi.reducerPath]: resetApi.reducer,
+  [baseApi.reducerPath]: baseApi.reducer,
 });
 const rootReducer = (state: RootState | undefined, action: Action<any>) => {
   return appReducer(state as never, action);

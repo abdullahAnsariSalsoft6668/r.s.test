@@ -5,27 +5,27 @@ import { localImages } from '@/assets/images';
 export type OnboardingSlide = {
     id: string;
     image: ImageSourcePropType;
-    title: string;
-    description: string;
+    titleKey: string;
+    descriptionKey: string;
 };
 
 export const ONBOARDING_SLIDES: OnboardingSlide[] = [
     {
         id: '1',
         image: localImages.onboarding1,
-        title: 'Save Up To 3x More',
-        description: 'Find the best discounts across multiple supermarkets in one place.',
+        titleKey: 'onboarding.slide1Title',
+        descriptionKey: 'onboarding.slide1Description',
     },
     {
         id: '2',
         image: localImages.onboarding2,
-        title: 'Discounts Stack Automatically',
-        description: 'We find and combine every eligible deal so you never miss savings.',
+        titleKey: 'onboarding.slide2Title',
+        descriptionKey: 'onboarding.slide2Description',
     },
     {
         id: '3',
         image: localImages.onboarding3,
-        title: 'Checkout In Seconds',
-        description: 'Show your barcode at checkout and watch the savings apply instantly.',
+        titleKey: 'onboarding.slide3Title',
+        descriptionKey: 'onboarding.slide3Description',
     },
 ];

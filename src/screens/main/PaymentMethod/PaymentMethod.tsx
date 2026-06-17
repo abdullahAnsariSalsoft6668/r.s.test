@@ -2,7 +2,7 @@ import HeaderComp from '@/components/HeaderComp';
 import MyIcons, { IconName } from '@/components/MyIcons';
 import PaymentMethodOption from '@/components/PaymentMethodOption';
 import TextComp from '@/components/TextComp';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { MainStackParamList } from '@/navigation/types';
 import { Colors } from '@/styles/colors';
 import { devLog } from '@/utils/logger';

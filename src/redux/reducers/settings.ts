@@ -2,6 +2,8 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import type { AppCurrency } from "@/constants/currency";
+import { DEFAULT_CURRENCY } from "@/constants/currency";
 
 export interface LanguageInterface {
   name: string;
@@ -16,17 +18,20 @@ export interface SettingsState {
   languages: Array<LanguageInterface>;
   defaultLanguage: LanguageInterface;
   defaultTheme: ThemeInterface;
+  defaultCurrency: AppCurrency;
 }
 
 const supportedLanguages: Array<LanguageInterface> = [
   { name: "English", sortName: "en" },
-  { name: "Arabic", sortName: "ar" },
+  { name: "Urdu", sortName: "ur" },
+  { name: "Roman Urdu", sortName: "ur-roman" },
 ];
 
 const initialState: SettingsState = {
   languages: supportedLanguages,
   defaultLanguage: supportedLanguages[0],
-  defaultTheme: { myTheme: "light" },
+  defaultTheme: { myTheme: "dark" },
+  defaultCurrency: DEFAULT_CURRENCY,
 };
 
 const settingSlice = createSlice({
@@ -46,9 +51,12 @@ const settingSlice = createSlice({
     saveDefaultTheme: (state, action: PayloadAction<ThemeInterface>) => {
       state.defaultTheme = action.payload;
     },
+    saveDefaultCurrency: (state, action: PayloadAction<AppCurrency>) => {
+      state.defaultCurrency = action.payload;
+    },
   },
 });
 
-export const { saveDefaultLanguage, saveDefaultTheme } = settingSlice.actions;
+export const { saveDefaultLanguage, saveDefaultTheme, saveDefaultCurrency } = settingSlice.actions;
 
 export default settingSlice.reducer;

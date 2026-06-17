@@ -13,10 +13,11 @@ import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated from 'react-native-reanimated';
+import { useTranslation } from 'react-i18next';
 
 import MyIcons from '@/components/MyIcons';
 import TextComp from '@/components/TextComp';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { usePressScale } from '@/hooks/animations/usePressScale';
 import { AuthStackParamList } from '@/navigation/types';
 import { completeOnboardingAction } from '@/redux/actions/auth';
@@ -33,6 +34,7 @@ import styles from './styles';
 import { useOnboardingLayout } from './useOnboardingLayout';
 
 const OnBoard = () => {
+    const { t } = useTranslation();
     const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
     const { width: windowWidth, height: windowHeight } = useWindowDimensions();
     const insets = useSafeAreaInsets();
@@ -124,7 +126,7 @@ const OnBoard = () => {
                             accessibilityRole="button"
                             accessibilityLabel="Skip onboarding"
                         >
-                            <TextComp text="Skip" style={styles.skipText} />
+                            <TextComp text={t('common.skip')} style={styles.skipText} />
                             <MyIcons
                                 name="rightChevron"
                                 size={moderateScale(14)}
@@ -151,8 +153,8 @@ const OnBoard = () => {
                     <View style={styles.textBlock}>
                         <OnboardingTextBlock
                             slideKey={activeSlide.id}
-                            title={activeSlide.title}
-                            description={activeSlide.description}
+                            title={t(activeSlide.titleKey)}
+                            description={t(activeSlide.descriptionKey)}
                             titleSize={layout.titleSize}
                             titleLineHeight={layout.titleLineHeight}
                             descriptionSize={layout.descriptionSize}
@@ -166,7 +168,7 @@ const OnBoard = () => {
                             onPress={handleLetsGo}
                             height={layout.ctaHeight}
                             iconPanelWidth={layout.ctaIconWidth}
-                            label={isLastSlide ? 'Get Started' : 'Next'}
+                            label={isLastSlide ? t('common.getStarted') : t('common.next')}
                         />
                     </View>
                 </View>

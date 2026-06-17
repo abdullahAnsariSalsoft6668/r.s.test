@@ -1,0 +1,218 @@
+import { Platform, StyleSheet } from 'react-native';
+
+import { plusJakarta } from '@/assets/fonts';
+import type { AppTheme } from '@/styles/theme';
+import { moderateScale } from '@/styles/scaling';
+import { spaces } from '@/styles/sizes';
+
+export const createDonateStyles = (theme: AppTheme) =>
+  StyleSheet.create({
+    scroll: { flex: 1 },
+    scrollContent: { flexGrow: 1, paddingBottom: moderateScale(140) },
+    loader: { marginVertical: moderateScale(40) },
+    recipientsBtn: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: moderateScale(6),
+      paddingHorizontal: moderateScale(12),
+      paddingVertical: moderateScale(8),
+      borderRadius: moderateScale(20),
+      backgroundColor: 'rgba(255, 255, 255, 0.14)',
+      borderWidth: 1,
+      borderColor: 'rgba(255, 255, 255, 0.2)',
+    },
+    recipientsBtnText: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(11),
+      color: theme.colors.text.inverse,
+    },
+    progressCard: {
+      backgroundColor: theme.colors.card.background,
+      borderRadius: theme.radius.lg,
+      padding: spaces.medium,
+      marginBottom: spaces.medium,
+      borderWidth: 1,
+      borderColor: theme.colors.border.subtle,
+      ...theme.shadows.card,
+    },
+    progressHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: moderateScale(12),
+    },
+    cardLabel: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(16),
+      color: theme.colors.text.primary,
+    },
+    percentBadge: {
+      backgroundColor: theme.palette.emerald.surface,
+      paddingHorizontal: moderateScale(12),
+      paddingVertical: moderateScale(6),
+      borderRadius: moderateScale(20),
+    },
+    percentBadgeText: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(16),
+      color: theme.colors.brand.primary,
+    },
+    progressDetail: {
+      fontFamily: plusJakarta.regular,
+      fontSize: moderateScale(13),
+      color: theme.colors.text.secondary,
+      marginTop: moderateScale(12),
+      lineHeight: moderateScale(18),
+    },
+    remainingBanner: {
+      marginTop: moderateScale(12),
+      backgroundColor: theme.palette.gold.surface,
+      borderRadius: moderateScale(12),
+      padding: moderateScale(12),
+      borderWidth: 1,
+      borderColor: 'rgba(201, 162, 39, 0.2)',
+    },
+    remainingText: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(14),
+      color: theme.colors.brand.primaryDark,
+    },
+    goalMet: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(14),
+      color: theme.colors.brand.success,
+      marginTop: moderateScale(12),
+    },
+    statsRow: {
+      flexDirection: 'row',
+      gap: moderateScale(12),
+      marginBottom: spaces.medium,
+    },
+    statCard: {
+      flex: 1,
+      backgroundColor: theme.colors.card.background,
+      borderRadius: theme.radius.md,
+      padding: spaces.medium,
+      borderWidth: 1,
+      borderColor: theme.colors.border.subtle,
+      ...theme.shadows.soft,
+    },
+    statLabel: {
+      fontFamily: plusJakarta.regular,
+      fontSize: moderateScale(12),
+      color: theme.colors.text.muted,
+      marginBottom: moderateScale(4),
+    },
+    statValue: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(18),
+      color: theme.colors.brand.primaryDark,
+    },
+    quoteCard: {
+      borderRadius: theme.radius.lg,
+      padding: spaces.medium,
+      marginBottom: spaces.large,
+      borderWidth: 1,
+      borderColor: theme.colors.border.subtle,
+    },
+    quoteMark: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(28),
+      color: theme.colors.brand.accent,
+      marginBottom: moderateScale(4),
+    },
+    quoteText: {
+      fontFamily: plusJakarta.regular,
+      fontSize: moderateScale(15),
+      color: theme.colors.text.primary,
+      lineHeight: moderateScale(24),
+      fontStyle: 'italic',
+    },
+    quoteRef: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(12),
+      color: theme.colors.brand.primary,
+      marginTop: moderateScale(10),
+    },
+    sectionTitle: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(16),
+      color: theme.colors.text.primary,
+      marginBottom: moderateScale(12),
+    },
+    donationRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: theme.colors.card.background,
+      borderRadius: theme.radius.md,
+      padding: spaces.medium,
+      marginBottom: spaces.small,
+      borderWidth: 1,
+      borderColor: theme.colors.border.subtle,
+      ...theme.shadows.soft,
+    },
+    donationIcon: {
+      width: moderateScale(40),
+      height: moderateScale(40),
+      borderRadius: moderateScale(12),
+      backgroundColor: theme.palette.emerald.surface,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: spaces.small,
+    },
+    donationIconText: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(16),
+      color: theme.colors.brand.primary,
+    },
+    donationInfo: {
+      flex: 1,
+    },
+    donationName: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(14),
+      color: theme.colors.text.primary,
+    },
+    donationDate: {
+      fontFamily: plusJakarta.regular,
+      fontSize: moderateScale(12),
+      color: theme.colors.text.muted,
+      marginTop: moderateScale(2),
+    },
+    donationAmount: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(15),
+      color: theme.colors.brand.primary,
+    },
+    fab: {
+      position: 'absolute',
+      right: moderateScale(16),
+      bottom: moderateScale(100),
+      borderRadius: moderateScale(28),
+      overflow: 'hidden',
+      ...Platform.select({
+        ios: {
+          shadowColor: theme.palette.emerald.dark,
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: theme.isDark ? 0.35 : 0.28,
+          shadowRadius: 12,
+        },
+        android: { elevation: 8 },
+        default: {},
+      }),
+    },
+    fabGradient: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: moderateScale(8),
+      paddingHorizontal: moderateScale(18),
+      paddingVertical: moderateScale(14),
+      borderRadius: moderateScale(28),
+      minHeight: moderateScale(52),
+    },
+    fabLabel: {
+      fontFamily: plusJakarta.bold,
+      fontSize: moderateScale(14),
+      color: theme.colors.text.inverse,
+    },
+  });

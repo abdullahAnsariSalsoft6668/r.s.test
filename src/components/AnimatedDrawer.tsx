@@ -1,6 +1,6 @@
 import { plusJakarta } from '@/assets/fonts';
 import { resolveDriverFirstName } from '@/components/home/DriverHomeHeader';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { useDrawer } from '@/context/DrawerContext';
 import { useAuthStagger } from '@/hooks/animations/useAuthStagger';
 import { usePressScale } from '@/hooks/animations/usePressScale';
@@ -11,6 +11,7 @@ import { theme } from '@/styles/theme';
 import { moderateScale, width } from '@/styles/scaling';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useMemo, useState } from 'react';
+import type { ViewStyle } from 'react-native';
 import {
     I18nManager,
     Image,
@@ -143,7 +144,7 @@ const DrawerMenuItem: React.FC<DrawerMenuItemProps> = ({ item, index, onPress })
     );
 };
 
-const DrawerContent: React.FC = () => {
+const DrawerContent: React.FC<{ panelStyle?: ViewStyle }> = ({ panelStyle }) => {
     const insets = useSafeAreaInsets();
     const { close } = useDrawer();
     const navigation = useNavigation<any>();
@@ -167,7 +168,7 @@ const DrawerContent: React.FC = () => {
     }, []);
 
     return (
-        <View style={styles.drawerPanel}>
+        <View style={[styles.drawerPanel, panelStyle]}>
             <LinearGradient
                 colors={['#00050a', DRAWER_BG, DRAWER_MID]}
                 locations={[0, 0.55, 1]}
@@ -260,25 +261,57 @@ interface AnimatedDrawerProps {
 
 const AnimatedDrawer: React.FC<AnimatedDrawerProps> = ({ children }) => {
     const { isOpen, progress, close } = useDrawer();
+    const isRTL = I18nManager.isRTL;
+    const drawerHiddenTranslate = isRTL ? DRAWER_WIDTH : -DRAWER_WIDTH;
+    const mainOpenTranslate = isRTL ? -DRAWER_MAIN_SHIFT : DRAWER_MAIN_SHIFT;
+
+    const drawerSlotStyle = useMemo<ViewStyle>(
+        () => ({
+            ...(isRTL ? { right: 0 } : { left: 0 }),
+            direction: 'ltr',
+        }),
+        [isRTL],
+    );
+
+    const drawerPanelStyle = useMemo<ViewStyle>(
+        () =>
+            isRTL
+                ? {
+                      borderTopLeftRadius: moderateScale(24),
+                      borderBottomLeftRadius: moderateScale(24),
+                      borderTopRightRadius: 0,
+                      borderBottomRightRadius: 0,
+                  }
+                : {
+                      borderTopRightRadius: moderateScale(24),
+                      borderBottomRightRadius: moderateScale(24),
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                  },
+        [isRTL],
+    );
 
     const mainAnimatedStyle = useAnimatedStyle(() => {
         const scale = interpolate(progress.value, [0, 1], [1, 0.92]);
-        const translateX = interpolate(progress.value, [0, 1], [0, DRAWER_MAIN_SHIFT]);
+        const translateX = interpolate(progress.value, [0, 1], [0, mainOpenTranslate]);
         const borderRadius = interpolate(progress.value, [0, 1], [0, DRAWER_BORDER_RADIUS]);
 
         return {
             transform: [{ translateX }, { scale }],
             borderRadius,
         };
-    });
+    }, [mainOpenTranslate]);
 
-    const drawerAnimatedStyle = useAnimatedStyle(() => ({
-        transform: [
-            {
-                translateX: interpolate(progress.value, [0, 1], [-DRAWER_WIDTH, 0]),
-            },
-        ],
-    }));
+    const drawerAnimatedStyle = useAnimatedStyle(
+        () => ({
+            transform: [
+                {
+                    translateX: interpolate(progress.value, [0, 1], [drawerHiddenTranslate, 0]),
+                },
+            ],
+        }),
+        [drawerHiddenTranslate],
+    );
 
     const overlayAnimatedStyle = useAnimatedStyle(() => ({
         opacity: interpolate(progress.value, [0, 1], [0, 0.55]),
@@ -286,8 +319,8 @@ const AnimatedDrawer: React.FC<AnimatedDrawerProps> = ({ children }) => {
 
     return (
         <View style={styles.container}>
-            <Animated.View style={[styles.drawerContainer, drawerAnimatedStyle]}>
-                <DrawerContent />
+            <Animated.View style={[styles.drawerContainer, drawerSlotStyle, drawerAnimatedStyle]}>
+                <DrawerContent panelStyle={drawerPanelStyle} />
             </Animated.View>
 
             <Animated.View style={[styles.mainContainer, mainAnimatedStyle]}>
@@ -311,20 +344,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: DRAWER_BG,
+        overflow: 'hidden',
     },
     drawerContainer: {
         position: 'absolute',
         top: 0,
         bottom: 0,
-        left: 0,
         width: DRAWER_WIDTH,
         zIndex: 2,
     },
     drawerPanel: {
         flex: 1,
         backgroundColor: Colors.white,
-        borderTopRightRadius: moderateScale(24),
-        borderBottomRightRadius: moderateScale(24),
         overflow: 'hidden',
     },
     mainContainer: {

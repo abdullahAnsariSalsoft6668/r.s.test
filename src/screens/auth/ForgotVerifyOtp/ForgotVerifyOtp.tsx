@@ -1,7 +1,7 @@
 // import { useVerifyCodeMutation, useVerifyEmailMutation } from '@/api/resetPassApiSlice';
 import AuthPromptRow from '@/components/AuthPromptRow';
 import TextComp from '@/components/TextComp';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import type { AuthStackParamList } from '@/navigation/types';
 import { palette } from '@/styles/palette';
 import { moderateScale } from '@/styles/scaling';

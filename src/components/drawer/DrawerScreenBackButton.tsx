@@ -1,4 +1,4 @@
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { usePressScale } from '@/hooks/animations/usePressScale';
 import { Colors } from '@/styles/colors';
 import { moderateScale } from '@/styles/scaling';

@@ -6,7 +6,7 @@ import WrapperContainer from '@/components/WrapperContainer';
 import MyIcons, { IconName } from '@/components/MyIcons';
 import { Colors } from '@/styles/colors';
 import { moderateScale } from '@/styles/scaling';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback } from 'react';
 import { ScrollView, View } from 'react-native';

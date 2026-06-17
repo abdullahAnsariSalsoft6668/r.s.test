@@ -13,7 +13,7 @@ import {
 } from '@/components/productDetails';
 import WrapperContainer from '@/components/WrapperContainer';
 import AuthYellowButton from '@/screens/auth/shared/AuthYellowButton';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { theme } from '@/styles/theme';
 import { moderateScale } from '@/styles/scaling';
 import { spaces } from '@/styles/sizes';

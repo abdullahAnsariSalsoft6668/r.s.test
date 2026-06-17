@@ -1,10 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import TextComp from '@/components/TextComp';
-import AuthGridOverlay from '@/screens/auth/shared/AuthGridOverlay';
-import { tabScreenStyles } from '@/styles/tabScreenStyles';
+import { useTabScreenStyles } from '@/hooks/useTabScreenStyles';
+import { useAppTheme } from '@/context/ThemeContext';
 import { moderateScale } from '@/styles/scaling';
 
 type TabScreenHeaderProps = {
@@ -12,6 +13,7 @@ type TabScreenHeaderProps = {
     subtitle?: string;
     leadingAction?: React.ReactNode;
     rightAction?: React.ReactNode;
+    rightActionVariant?: 'icon' | 'button';
     children?: React.ReactNode;
 };
 
@@ -20,14 +22,23 @@ const TabScreenHeader: React.FC<TabScreenHeaderProps> = ({
     subtitle,
     leadingAction,
     rightAction,
+    rightActionVariant = 'icon',
     children,
 }) => {
     const insets = useSafeAreaInsets();
+    const tabScreenStyles = useTabScreenStyles();
+    const { theme } = useAppTheme();
 
     return (
-        <View style={[tabScreenStyles.hero, { paddingTop: insets.top + moderateScale(12) }]}>
-            <View style={tabScreenStyles.heroGrid} pointerEvents="none">
-                <AuthGridOverlay />
+        <LinearGradient
+            colors={[...theme.gradients.header]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={[tabScreenStyles.hero, { paddingTop: insets.top + moderateScale(14) }]}
+        >
+            <View style={tabScreenStyles.heroPattern} pointerEvents="none">
+                <View style={tabScreenStyles.heroOrbLarge} />
+                <View style={tabScreenStyles.heroOrbSmall} />
             </View>
             <View style={tabScreenStyles.heroContent}>
                 {leadingAction ? (
@@ -41,12 +52,16 @@ const TabScreenHeader: React.FC<TabScreenHeaderProps> = ({
                         ) : null}
                     </View>
                     {rightAction ? (
-                        <View style={tabScreenStyles.heroAction}>{rightAction}</View>
+                        rightActionVariant === 'button' ? (
+                            rightAction
+                        ) : (
+                            <View style={tabScreenStyles.heroAction}>{rightAction}</View>
+                        )
                     ) : null}
                 </View>
                 {children}
             </View>
-        </View>
+        </LinearGradient>
     );
 };
 

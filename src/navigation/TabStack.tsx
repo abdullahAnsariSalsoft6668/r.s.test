@@ -1,12 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import routes, { tabRoutes } from '@/constants/routes';
+import routes from '@/constants/routeNames';
+import { tabRoutes } from '@/constants/routes';
 import { theme } from '@/styles/theme';
 import MyTabBar from './MyTabBar';
 
 const Tab = createBottomTabNavigator();
 
-/** Bottom tab navigator: Home, Deals, Cashback, Insights, Menu */
+/** Bottom tab navigator: Home, Transactions, Donate, Analytics, Profile */
 export const BottomTabs = () => {
   return (
     <Tab.Navigator
@@ -21,10 +22,10 @@ export const BottomTabs = () => {
       initialRouteName={routes.tab.home}
     >
       <Tab.Screen name={routes.tab.home} component={tabRoutes[routes.tab.home]} />
-      <Tab.Screen name={routes.tab.deals} component={tabRoutes[routes.tab.deals]} />
-      <Tab.Screen name={routes.tab.cashback} component={tabRoutes[routes.tab.cashback]} />
-      <Tab.Screen name={routes.tab.insights} component={tabRoutes[routes.tab.insights]} />
-      <Tab.Screen name={routes.tab.menu} component={tabRoutes[routes.tab.menu]} />
+      <Tab.Screen name={routes.tab.transactions} component={tabRoutes[routes.tab.transactions]} />
+      <Tab.Screen name={routes.tab.donate} component={tabRoutes[routes.tab.donate]} />
+      <Tab.Screen name={routes.tab.analytics} component={tabRoutes[routes.tab.analytics]} />
+      <Tab.Screen name={routes.tab.profileTab} component={tabRoutes[routes.tab.profileTab]} />
     </Tab.Navigator>
   );
 };

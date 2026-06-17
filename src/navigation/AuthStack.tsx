@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import routes, { authRoutes } from '@/constants/routes';
+import routes from '@/constants/routeNames';
+import { authRoutes } from '@/constants/routes';
 import { useSelector } from '@/redux/hooks';
 import { theme } from '@/styles/theme';
 import { AuthStackParamList } from './types';

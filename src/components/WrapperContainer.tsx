@@ -1,7 +1,8 @@
-import { Colors } from '@/styles/colors';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StatusBar, StyleSheet, View, ViewStyle } from 'react-native';
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
+
+import { useAppTheme } from '@/context/ThemeContext';
 
 interface WrapperContainerProps extends SafeAreaViewProps {
     children: React.ReactNode;
@@ -12,17 +13,29 @@ interface WrapperContainerProps extends SafeAreaViewProps {
 const WrapperContainer: React.FC<WrapperContainerProps> = ({
     children,
     style,
-    innerBackgroundColor = '#FAFAFA',
+    innerBackgroundColor,
     ...safeAreaProps
-}) => (
-    <SafeAreaView
-        style={[{ backgroundColor: Colors.tabPrimary }, styles.container, style]}
-        {...safeAreaProps}
-    >
-        <StatusBar barStyle="dark-content" />
-        <View style={[styles.inner, { backgroundColor: innerBackgroundColor }]}>{children}</View>
-    </SafeAreaView>
-);
+}) => {
+    const { theme, isDark } = useAppTheme();
+    const resolvedInnerBg = innerBackgroundColor ?? theme.colors.background.primary;
+
+    return (
+        <SafeAreaView
+            style={[
+                styles.container,
+                { backgroundColor: theme.colors.background.header },
+                style,
+            ]}
+            {...safeAreaProps}
+        >
+            <StatusBar
+                barStyle={isDark ? 'light-content' : 'dark-content'}
+                backgroundColor={theme.colors.background.header}
+            />
+            <View style={[styles.inner, { backgroundColor: resolvedInnerBg }]}>{children}</View>
+        </SafeAreaView>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

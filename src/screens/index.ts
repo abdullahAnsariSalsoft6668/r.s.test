@@ -28,20 +28,26 @@ export { default as Subscription } from './main/Subscription/Subscription';
 export { default as MainSupport } from './main/Support/Support';
 
 // -----------------------------------------------------------------------------
-// Tab screens
+// Tab screens (RizqShare)
 // -----------------------------------------------------------------------------
 export { default as Home } from './main/TabScreens/Home/Home';
-export { default as Deals } from './main/TabScreens/Deals/Deals';
-export { default as Cashback } from './main/TabScreens/Cashback/Cashback';
-export { default as Insights } from './main/TabScreens/Insights/Insights';
-export { default as MenuTab } from './main/TabScreens/Menu/MenuTab';
-export { default as ExtraWork } from './main/TabScreens/ExtraWork/ExtraWork';
-export { default as Layover } from './main/TabScreens/Layover/Layover';
-export { default as Alerts } from './main/TabScreens/Alerts/Alerts';
+export { default as Transactions } from './main/TabScreens/Transactions/Transactions';
+export { default as Donate } from './main/TabScreens/Donate/Donate';
+export { default as Analytics } from './main/TabScreens/Analytics/Analytics';
+export { default as ProfileTab } from './main/TabScreens/ProfileTab/ProfileTab';
 
 // -----------------------------------------------------------------------------
 // Other main screens
 // -----------------------------------------------------------------------------
+export { default as LanguageSettings } from './main/LanguageSettings/LanguageSettings';
+export { default as CurrencySettings } from './main/CurrencySettings/CurrencySettings';
+export { default as AddIncome } from './main/AddIncome/AddIncome';
+export { default as AddExpense } from './main/AddExpense/AddExpense';
+export { default as GivingSettings } from './main/GivingSettings/GivingSettings';
+export { default as RecipientsList } from './main/RecipientsList/RecipientsList';
+export { default as AddRecipient } from './main/AddRecipient/AddRecipient';
+export { default as AddDonation } from './main/AddDonation/AddDonation';
+export { default as ZakatHub } from './main/ZakatHub/ZakatHub';
 export { default as Notification } from './main/Notification/Notification';
 export { default as Checkout } from './main/Checkout/Checkout';
 export { default as Mybets } from './main/Mybets/Mybets';

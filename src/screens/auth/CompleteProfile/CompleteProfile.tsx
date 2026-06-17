@@ -5,7 +5,7 @@ import { Pressable, Text, View } from 'react-native';
 
 import TextComp from '@/components/TextComp';
 import TextInputComp from '@/components/TextInputComp';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { AuthStackParamList } from '@/navigation/types';
 
 import AuthScreenLayout from '../shared/AuthScreenLayout';

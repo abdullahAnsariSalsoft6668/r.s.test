@@ -6,9 +6,13 @@
 
 import { hydrateAuthFromSecureStorage } from "@/redux/actions/auth";
 import { changeFirstTime } from "@/redux/reducers/auth";
-import { LanguageInterface, saveDefaultLanguage, saveDefaultTheme } from "@/redux/reducers/settings";
+import { LanguageInterface, saveDefaultCurrency, saveDefaultLanguage, saveDefaultTheme } from "@/redux/reducers/settings";
 import store from "@/redux/store";
-import i18next from "i18next";
+import i18n, { isRtlLocale } from "@/lang";
+import { isAppCurrency, DEFAULT_CURRENCY } from "@/constants/currency";
+import { mockStore } from "@/api/mock/mockStore";
+import { syncRtlWithLocale } from "@/utils/rtl";
+import { I18nManager } from "react-native";
 import { secureStorage } from "./secureStorage";
 const { dispatch } = store;
 
@@ -47,24 +51,40 @@ export const getLocalItem = async () => {
         const theme = await secureStorage.getItem('THEME');
         console.log('theme', theme);
 
+        const currency = await secureStorage.getItem('CURRENCY');
+        console.log('currency', currency);
+
+        const locale = language?.sortName ?? 'en';
+
+        // Apply RTL layout before first render based on saved language
+        syncRtlWithLocale(locale);
+
         // Apply saved language if it exists
         if (language) {
-            // Change i18next language
-            i18next.changeLanguage(language.sortName);
-            // Update Redux store with language preference
+            await i18n.changeLanguage(locale);
             dispatch(saveDefaultLanguage(language));
+        } else {
+            I18nManager.allowRTL(isRtlLocale('en'));
+            I18nManager.forceRTL(false);
+            await i18n.changeLanguage('en');
         }
 
-        // Apply saved theme if it exists, otherwise set default light theme
+        // Apply saved theme if it exists, otherwise set default dark theme
         if (theme) {
             dispatch(saveDefaultTheme({ myTheme: theme }));
         } else {
-            // Set default theme if none exists
-            const systemTheme = 'light';
-            await secureStorage.setItem('THEME', systemTheme);
-            dispatch(saveDefaultTheme({ myTheme: systemTheme }));
+            const defaultTheme = 'dark';
+            await secureStorage.setItem('THEME', defaultTheme);
+            dispatch(saveDefaultTheme({ myTheme: defaultTheme }));
+        }
+
+        const resolvedCurrency = currency && isAppCurrency(currency) ? currency : DEFAULT_CURRENCY;
+        mockStore.setPreferredCurrency(resolvedCurrency);
+        dispatch(saveDefaultCurrency(resolvedCurrency));
+        if (!currency || !isAppCurrency(currency)) {
+            await secureStorage.setItem('CURRENCY', resolvedCurrency);
         }
     } catch (error) {
         console.log(error);
     }
-}           
+}

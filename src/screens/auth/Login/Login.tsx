@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 // import { useLoginMutation } from '@/api/authApiSlice';
 import AuthPromptRow from '@/components/AuthPromptRow';
 import TextComp from '@/components/TextComp';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { AuthStackParamList } from '@/navigation/types';
 import { loginSessionAction } from '@/redux/actions/auth';
 

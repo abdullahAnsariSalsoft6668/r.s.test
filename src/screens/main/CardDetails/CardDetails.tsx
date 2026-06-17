@@ -4,7 +4,7 @@ import MyIcons from '@/components/MyIcons';
 import TextComp from '@/components/TextComp';
 import TextInputComp from '@/components/TextInputComp';
 import WrapperContainer from '@/components/WrapperContainer';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { MainStackParamList } from '@/navigation/types';
 import { Colors } from '@/styles/colors';
 import { moderateScale } from '@/styles/scaling';

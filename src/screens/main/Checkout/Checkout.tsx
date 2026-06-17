@@ -4,7 +4,7 @@ import CustomModal from '@/components/Modal';
 import MyIcons from '@/components/MyIcons';
 import TextComp from '@/components/TextComp';
 import WrapperContainer from '@/components/WrapperContainer';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { Colors } from '@/styles/colors';
 import { moderateScale } from '@/styles/scaling';
 import { useNavigation } from '@react-navigation/native';

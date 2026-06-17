@@ -1,60 +1,14 @@
+/**
+ * Screen route maps. Route name constants live in `routeNames.ts` so screens
+ * can import them without pulling in every screen component (require cycle).
+ */
 import * as Screens from '@/screens';
-const routes = {
-  auth: {
-    login: 'Login',
-    forgot: 'Forgot',
-    forgotVerifyOtp: 'ForgotVerifyOtp',
-    forgotResetPassword: 'ForgotResetPassword',
-    onboarding: 'Onboarding',
-    register: 'Register',
-    completeProfile: 'CompleteProfile',
-  },
-  main: {
-    settings: 'Settings',
-    editProfile: 'EditProfile',
-    changePassword: 'ChangePassword',
-    privacySettings: 'PrivacySettings',
-    privacyFirst: 'PrivacyFirst',
-    subscription: 'Subscription',
-    manageSubscriptions: 'ManageSubscriptions',
-    paymentMethod: 'PaymentMethod',
-    help: 'Help',
-    support: 'Support',
-    cardDetails: 'CardDetails',
-    helpAndCenter: 'HelpAndCenter',
-    profileDetails: 'ProfileDetails',
-    profile: 'Profile',
-    notification: 'Notification',
-    checkout: 'Checkout',
-    mybets: 'Mybets',
-    workHistory: 'WorkHistory',
-    wageOverview: 'WageOverview',
-    myProfile: 'MyProfile',
-    setting: 'Setting',
-    helpSupport: 'HelpSupport',
-    helpHowItWorks: 'HelpHowItWorks',
-    routeDetails: 'RouteDetails',
-    supportedStores: 'SupportedStores',
-    productDetails: 'ProductDetails',
-    savingBarcode: 'SavingBarcode',
-    savingBarcodeRedeemed: 'SavingBarcodeRedeemed',
-},
-  tab: {
-    home: 'Home',
-    deals: 'Deals',
-    cashback: 'Cashback',
-    insights: 'Insights',
-    menu: 'Menu',
-    extraWork: 'ExtraWork',
-    layover: 'Layover',
-    alerts: 'Alerts',
-},
-  navigator: {
-    auth: 'Auth',
-    main: 'Main',
-    tab: 'Tabs',
-  },
-} as const;
+
+import routes from './routeNames';
+
+export { routes };
+export default routes;
+
 export const authRoutes = {
   [routes.auth.login]: Screens.Login,
   [routes.auth.forgot]: Screens.Forgot,
@@ -64,16 +18,15 @@ export const authRoutes = {
   [routes.auth.register]: Screens.Register,
   [routes.auth.completeProfile]: Screens.CompleteProfile,
 };
+
 export const tabRoutes = {
   [routes.tab.home]: Screens.Home,
-  [routes.tab.deals]: Screens.Deals,
-  [routes.tab.cashback]: Screens.Cashback,
-  [routes.tab.insights]: Screens.Insights,
-  [routes.tab.menu]: Screens.MenuTab,
-  [routes.tab.extraWork]: Screens.ExtraWork,
-  [routes.tab.layover]: Screens.Layover,
-  [routes.tab.alerts]: Screens.Alerts,
+  [routes.tab.transactions]: Screens.Transactions,
+  [routes.tab.donate]: Screens.Donate,
+  [routes.tab.analytics]: Screens.Analytics,
+  [routes.tab.profileTab]: Screens.ProfileTab,
 };
+
 export const mainRoutes = {
   [routes.main.settings]: Screens.Settings,
   [routes.main.editProfile]: Screens.EditProfile,
@@ -103,5 +56,13 @@ export const mainRoutes = {
   [routes.main.productDetails]: Screens.ProductDetails,
   [routes.main.savingBarcode]: Screens.SavingBarcode,
   [routes.main.savingBarcodeRedeemed]: Screens.SavingBarcodeRedeemed,
+  [routes.main.languageSettings]: Screens.LanguageSettings,
+  [routes.main.currencySettings]: Screens.CurrencySettings,
+  [routes.main.addIncome]: Screens.AddIncome,
+  [routes.main.addExpense]: Screens.AddExpense,
+  [routes.main.givingSettings]: Screens.GivingSettings,
+  [routes.main.recipientsList]: Screens.RecipientsList,
+  [routes.main.addRecipient]: Screens.AddRecipient,
+  [routes.main.addDonation]: Screens.AddDonation,
+  [routes.main.zakatHub]: Screens.ZakatHub,
 };
-export default routes;

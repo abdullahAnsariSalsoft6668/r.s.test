@@ -56,5 +56,14 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BrittiSansTrial-Semibold.otf</string>
+		<string>BrittiSansTrial-Regular.otf</string>
+		<string>PlusJakartaSans-Regular.ttf</string>
+		<string>Nasalization-Regular.ttf</string>
+		<string>PlusJakartaSans-Bold.ttf</string>
+		<string>PlusJakartaSans-ExtraBold.ttf</string>
+	</array>
 </dict>
 </plist>

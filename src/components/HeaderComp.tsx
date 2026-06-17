@@ -1,5 +1,5 @@
 import TextComp from '@/components/TextComp';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { useDrawerSafe } from '@/context/DrawerContext';
 import { navigateToAlertsTab } from '@/navigation/navigateToAlerts';
 import { clearDataAction } from '@/redux/actions/auth';

@@ -3,6 +3,7 @@ import type { SettingsSection } from './types';
 /** Avoid importing routes here — settings/constants is pulled in via routes.ts → screens barrel cycle. */
 const CHANGE_PASSWORD_SCREEN = 'ChangePassword';
 const PRIVACY_SETTINGS_SCREEN = 'PrivacySettings';
+const LANGUAGE_SETTINGS_SCREEN = 'LanguageSettings';
 
 export const SETTINGS_BG = '#001533';
 export const SETTINGS_GRADIENT_GLOW = '#003380';
@@ -34,9 +35,10 @@ export const SETTINGS_SECTIONS: SettingsSection[] = [
             {
                 id: 'language',
                 title: 'Language',
-                subtitle: 'English (US)',
+                subtitle: 'English',
                 icon: 'language',
                 type: 'navigate',
+                screen: LANGUAGE_SETTINGS_SCREEN,
             },
         ],
     },

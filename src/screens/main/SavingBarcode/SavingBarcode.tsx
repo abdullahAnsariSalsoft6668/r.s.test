@@ -15,7 +15,7 @@ import {
 } from '@/components/savingBarcode';
 import WrapperContainer from '@/components/WrapperContainer';
 import AuthYellowButton from '@/screens/auth/shared/AuthYellowButton';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { savingBarcodeStyles } from '@/styles/savingBarcodeStyles';
 import { tabScreenStyles } from '@/styles/tabScreenStyles';
 import { theme } from '@/styles/theme';

@@ -1,7 +1,7 @@
 import { localImages } from '@/assets/images';
 import TextComp from '@/components/TextComp';
 import WrapperContainer from '@/components/WrapperContainer';
-import routes from '@/constants/routes';
+import routes from '@/constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useMemo, useState } from 'react';
 import { FlatList, ListRenderItem, StatusBar, View } from 'react-native';
@@ -51,6 +51,14 @@ type NotificationsInboxProps = {
     showBackButton?: boolean;
 };
 
+const TAB_SCREEN_SET = new Set<string>([
+    routes.tab.home,
+    routes.tab.transactions,
+    routes.tab.donate,
+    routes.tab.analytics,
+    routes.tab.profileTab,
+]);
+
 const getNotificationDestination = (iconType: NotificationIconType) => {
     switch (iconType) {
         case 'route':
@@ -58,9 +66,9 @@ const getNotificationDestination = (iconType: NotificationIconType) => {
             return { screen: routes.main.routeDetails, params: { routeId: 'route-a-downtown' } };
         case 'approved':
         case 'pending':
-            return { screen: routes.tab.extraWork };
+            return { screen: routes.tab.home };
         case 'layover':
-            return { screen: routes.tab.layover };
+            return { screen: routes.tab.home };
         case 'schedule':
             return { screen: routes.tab.home };
         case 'system':
@@ -111,7 +119,7 @@ const NotificationsInbox: React.FC<NotificationsInboxProps> = ({ showBackButton 
                 return;
             }
 
-            if (destination.screen === routes.tab.extraWork || destination.screen === routes.tab.layover || destination.screen === routes.tab.home) {
+            if (TAB_SCREEN_SET.has(destination.screen)) {
                 navigation.navigate(routes.navigator.tab as never, {
                     screen: destination.screen,
                 } as never);
