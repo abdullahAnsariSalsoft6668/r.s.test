@@ -1,0 +1,54 @@
+export type RootStackParamList = {
+  Auth: undefined;
+  Main: undefined;
+};
+
+export type AuthStackParamList = {
+  Login: undefined;
+  Onboarding: undefined;
+  Register: undefined;
+  Forgot: undefined;
+  ForgotVerifyOtp: { email: string };
+  ForgotResetPassword: { email: string; otp: string };
+  CompleteProfile: undefined;
+};
+
+export type MainStackParamList = {
+  Tabs: undefined;
+  Settings: undefined;
+  EditProfile: undefined;
+  ChangePassword: undefined;
+  PrivacySettings: undefined;
+  PrivacyFirst: undefined;
+  Subscription: undefined;
+  ManageSubscriptions: undefined;
+  PaymentMethod: undefined;
+  Help: undefined;
+  Support: undefined;
+  CardDetails: undefined;
+  HelpAndCenter: undefined;
+  ProfileDetails: undefined;
+  Profile: undefined;
+  Home: undefined;
+  Deals: undefined;
+  Cashback: undefined;
+  Insights: undefined;
+  Menu: undefined;
+  ExtraWork: undefined;
+  Layover: undefined;
+  Alerts: undefined;
+  Notification: undefined;
+  Checkout: undefined;
+  Mybets: undefined;
+  WorkHistory: undefined;
+  WageOverview: undefined;
+  MyProfile: undefined;
+  Setting: undefined;
+  HelpSupport: undefined;
+  HelpHowItWorks: undefined;
+  RouteDetails: { routeId: string };
+  SupportedStores: undefined;
+  ProductDetails: { dealId: string };
+  SavingBarcode: { dealId: string };
+  SavingBarcodeRedeemed: { dealId: string };
+};
