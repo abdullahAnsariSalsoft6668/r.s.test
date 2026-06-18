@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-    ActivityIndicator,
     DimensionValue,
     LayoutChangeEvent,
     Pressable,
@@ -19,6 +18,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { I18nManager } from 'react-native';
 
 import { brittiSans } from '@/assets/fonts';
+import { ButtonShimmer } from '@/components/shimmer';
 import TextComp from './TextComp';
 import { Colors } from '@/styles/colors';
 import fontFamily from '@/styles/fontFamily';
@@ -143,7 +143,7 @@ const ButtonComp: React.FC<ButtonCompProps> = ({
     const innerRadius = Math.max(radius - BORDER_WIDTH, 0);
 
     useEffect(() => {
-        loadingProgress.value = withTiming(loading ? 1 : 0, { duration: 0 });
+        loadingProgress.value = withTiming(loading ? 1 : 0, { duration: 150 });
     }, [loading, loadingProgress]);
 
     const onLayout = useCallback(
@@ -167,23 +167,19 @@ const ButtonComp: React.FC<ButtonCompProps> = ({
         };
     }, [fullWidth, effectiveHeight, radius, useAnimatedLoadingLayout]);
 
-    const contentOpacityStyle = useAnimatedStyle(() => {
-        if (type === 'normal') {
-            return { opacity: loading ? 0 : 1 };
-        }
-        return {
-            opacity: interpolate(loadingProgress.value, [0, 0.5], [1, 0]),
-        };
-    });
+    const contentOpacityStyle = useAnimatedStyle(() => ({
+        opacity:
+            type === 'normal'
+                ? interpolate(loadingProgress.value, [0, 1], [1, 0])
+                : interpolate(loadingProgress.value, [0, 0.45], [1, 0]),
+    }));
 
-    const loaderOpacityStyle = useAnimatedStyle(() => {
-        if (type === 'normal') {
-            return { opacity: loading ? 1 : 0 };
-        }
-        return {
-            opacity: interpolate(loadingProgress.value, [0.5, 1], [0, 1]),
-        };
-    });
+    const loaderOpacityStyle = useAnimatedStyle(() => ({
+        opacity:
+            type === 'normal'
+                ? interpolate(loadingProgress.value, [0, 1], [0, 1])
+                : interpolate(loadingProgress.value, [0.45, 1], [0, 1]),
+    }));
 
     const fillGradient =
         disabled && split
@@ -207,7 +203,7 @@ const ButtonComp: React.FC<ButtonCompProps> = ({
             ? Colors.text
             : Colors.white;
 
-    const loaderColor = isOutline ? Colors.text : Colors.white;
+    const loaderColor = isOutline ? Colors.text : split ? labelColor : Colors.white;
 
     const userStyleForRoot = useAnimatedLoadingLayout ? stripWidthAndBorderRadius(style) : style;
 
@@ -288,7 +284,7 @@ const ButtonComp: React.FC<ButtonCompProps> = ({
                         },
                     ]}
                 >
-                    <Animated.View style={[styles.splitLabelRow, contentOpacityStyle, contentStyle]}>
+                    <Animated.View style={[styles.splitLabelRow, contentStyle]}>
                         {leftIcon ? <View style={styles.leftIconSlot}>{leftIcon}</View> : null}
                         <TextComp
                             text={title}
@@ -322,31 +318,26 @@ const ButtonComp: React.FC<ButtonCompProps> = ({
         ];
 
         const content = (
-            <>
-                <Animated.View style={[styles.classicContent, contentOpacityStyle, contentStyle]}>
-                    {leftIcon ? <View style={styles.classicIconSlot}>{leftIcon}</View> : null}
-                    <TextComp
-                        text={title}
-                        style={[
-                            styles.classicLabel,
-                            { fontSize: sizeToken.fontSize, color: labelColor },
-                            textStyle,
-                        ]}
-                    />
-                    {rightIcon ? (
-                        <View style={styles.classicIconSlot}>
-                            {rightIcon === true ? (
-                                <MyIcons name="rightArrow" size={resolvedIconSize} fill={Colors.white} />
-                            ) : (
-                                rightIcon
-                            )}
-                        </View>
-                    ) : null}
-                </Animated.View>
-                <Animated.View style={[styles.loaderWrap, loaderOpacityStyle]} pointerEvents="none">
-                    <ActivityIndicator color={loaderColor} size="small" />
-                </Animated.View>
-            </>
+            <Animated.View style={[styles.classicContent, contentStyle]}>
+                {leftIcon ? <View style={styles.classicIconSlot}>{leftIcon}</View> : null}
+                <TextComp
+                    text={title}
+                    style={[
+                        styles.classicLabel,
+                        { fontSize: sizeToken.fontSize, color: labelColor },
+                        textStyle,
+                    ]}
+                />
+                {rightIcon ? (
+                    <View style={styles.classicIconSlot}>
+                        {rightIcon === true ? (
+                            <MyIcons name="rightArrow" size={resolvedIconSize} fill={Colors.white} />
+                        ) : (
+                            rightIcon
+                        )}
+                    </View>
+                ) : null}
+            </Animated.View>
         );
 
         if (isOutline) {
@@ -373,13 +364,14 @@ const ButtonComp: React.FC<ButtonCompProps> = ({
             disabled={disabled || loading}
             onLayout={onLayout}
             style={rootStyle}
+            accessibilityState={{ disabled: disabled || loading, busy: loading }}
         >
-            {split ? renderSplitBody() : renderClassicBody()}
-            {split ? (
-                <Animated.View style={[styles.loaderWrap, loaderOpacityStyle]} pointerEvents="none">
-                    <ActivityIndicator color={Colors.buttonSplitLabel} size="small" />
-                </Animated.View>
-            ) : null}
+            <Animated.View style={[styles.bodyWrap, contentOpacityStyle]}>
+                {split ? renderSplitBody() : renderClassicBody()}
+            </Animated.View>
+            <Animated.View style={[styles.loaderWrap, loaderOpacityStyle]} pointerEvents="none">
+                <ButtonShimmer color={loaderColor} inverse={!isOutline && !split} />
+            </Animated.View>
         </AnimatedPressable>
     );
 };
@@ -392,6 +384,10 @@ const styles = StyleSheet.create({
     root: {
         overflow: 'hidden',
         alignSelf: 'stretch',
+        position: 'relative',
+    },
+    bodyWrap: {
+        width: '100%',
     },
     borderShell: {
         width: '100%',

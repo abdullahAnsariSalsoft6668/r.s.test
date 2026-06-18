@@ -9,36 +9,36 @@
 /* Begin PBXBuildFile section */
 		0C80B921A6F3F58F76C31292 /* libPods-UltimateGrocery.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-UltimateGrocery.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		14918335BEEF4EEEBDE1A4AF /* BrittiSansTrial-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */; };
+		28A7F51E965F42D3B52973B9 /* Nasalization-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */; };
+		58E37AB1241C4248A77A5CD7 /* BrittiSansTrial-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */; };
 		72EF40071FF2338A39FAF22F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		58E37AB1241C4248A77A5CD7 /* BrittiSansTrial-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */; };
-		14918335BEEF4EEEBDE1A4AF /* BrittiSansTrial-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */; };
-		E14E78BFFB3140789C751B2D /* PlusJakartaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */; };
-		28A7F51E965F42D3B52973B9 /* Nasalization-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */; };
 		AB7CB74E5FB44A3797FFE28E /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3C5501883F94DD19714F54C /* PlusJakartaSans-Bold.ttf */; };
-		B4A3328BD45F48559287A02C /* PlusJakartaSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */; };
 		ABFD8CE81FD44AD5B38BE6BD /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 3D62F6107C364063AFBD82FF /* index.ts */; };
+		B4A3328BD45F48559287A02C /* PlusJakartaSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */; };
+		E14E78BFFB3140789C751B2D /* PlusJakartaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13B07F961A680F5B00A75B9A /* UltimateGrocery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UltimateGrocery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "UltimateGrocery/Images.xcassets"; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "UltimateGrocery/Info.plist"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* UltimateGrocery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateGrocery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = UltimateGrocery/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = UltimateGrocery/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = UltimateGrocery/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PlusJakartaSans-Regular.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Regular.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-UltimateGrocery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UltimateGrocery.debug.xcconfig"; path = "Target Support Files/Pods-UltimateGrocery/Pods-UltimateGrocery.debug.xcconfig"; sourceTree = "<group>"; };
+		3D62F6107C364063AFBD82FF /* index.ts */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = index.ts; path = ../src/assets/fonts/index.ts; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-UltimateGrocery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UltimateGrocery.release.xcconfig"; path = "Target Support Files/Pods-UltimateGrocery/Pods-UltimateGrocery.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-UltimateGrocery.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UltimateGrocery.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = UltimateGrocery/AppDelegate.swift; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "UltimateGrocery/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = UltimateGrocery/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nasalization-Regular.ttf"; path = "../src/assets/fonts/Nasalization-Regular.ttf"; sourceTree = "<group>"; };
+		B3C5501883F94DD19714F54C /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PlusJakartaSans-Bold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; };
+		BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "PlusJakartaSans-ExtraBold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BrittiSansTrial-Regular.otf"; path = "../src/assets/fonts/BrittiSansTrial-Regular.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */ = {isa = PBXFileReference; name = "BrittiSansTrial-Semibold.otf"; path = "../src/assets/fonts/BrittiSansTrial-Semibold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */ = {isa = PBXFileReference; name = "BrittiSansTrial-Regular.otf"; path = "../src/assets/fonts/BrittiSansTrial-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Regular.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */ = {isa = PBXFileReference; name = "Nasalization-Regular.ttf"; path = "../src/assets/fonts/Nasalization-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B3C5501883F94DD19714F54C /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-Bold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "PlusJakartaSans-ExtraBold.ttf"; path = "../src/assets/fonts/PlusJakartaSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3D62F6107C364063AFBD82FF /* index.ts */ = {isa = PBXFileReference; name = "index.ts"; path = "../src/assets/fonts/index.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BrittiSansTrial-Semibold.otf"; path = "../src/assets/fonts/BrittiSansTrial-Semibold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
-			name = "UltimateGrocery";
+			name = UltimateGrocery;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -72,6 +72,21 @@
 				5DCACB8F33CDC322A6C60F78 /* libPods-UltimateGrocery.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		31E08ADFF1D94CA9B413406E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */,
+				D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */,
+				377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */,
+				94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */,
+				B3C5501883F94DD19714F54C /* PlusJakartaSans-Bold.ttf */,
+				BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */,
+				3D62F6107C364063AFBD82FF /* index.ts */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -113,21 +128,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		31E08ADFF1D94CA9B413406E /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				EE43783AACED4131B2C12559 /* BrittiSansTrial-Semibold.otf */,
-				D33DEF4990EE4BBCB7D4C653 /* BrittiSansTrial-Regular.otf */,
-				377A7B96827245868B7A4336 /* PlusJakartaSans-Regular.ttf */,
-				94A85B1738584A00B4B8A2CF /* Nasalization-Regular.ttf */,
-				B3C5501883F94DD19714F54C /* PlusJakartaSans-Bold.ttf */,
-				BC30715A119B43318A0CCC6C /* PlusJakartaSans-ExtraBold.ttf */,
-				3D62F6107C364063AFBD82FF /* index.ts */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -148,8 +148,8 @@
 			);
 			dependencies = (
 			);
-			name = "UltimateGrocery";
-			productName = "UltimateGrocery";
+			name = UltimateGrocery;
+			productName = UltimateGrocery;
 			productReference = 13B07F961A680F5B00A75B9A /* UltimateGrocery.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -312,7 +312,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "UltimateGrocery/Info.plist";
+				INFOPLIST_FILE = UltimateGrocery/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Grocery";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -325,8 +325,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mapps.ultimategrocery";
-				PRODUCT_NAME = "UltimateGrocery";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapps.ultimategrocery;
+				PRODUCT_NAME = UltimateGrocery;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_OBJC_BRIDGING_HEADER = "UltimateGrocery/UltimateGrocery-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -343,7 +343,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = "UltimateGrocery/Info.plist";
+				INFOPLIST_FILE = UltimateGrocery/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultimate Grocery";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -356,8 +356,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mapps.ultimategrocery";
-				PRODUCT_NAME = "UltimateGrocery";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapps.ultimategrocery;
+				PRODUCT_NAME = UltimateGrocery;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_OBJC_BRIDGING_HEADER = "UltimateGrocery/UltimateGrocery-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

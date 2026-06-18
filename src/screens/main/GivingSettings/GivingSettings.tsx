@@ -10,6 +10,7 @@ import {
 import { useGetIncomesQuery } from '@/api/incomeApiSlice';
 import ButtonComp from '@/components/ButtonComp';
 import HeaderComp from '@/components/HeaderComp';
+import { GivingSettingsShimmer } from '@/components/shimmer';
 import TextComp from '@/components/TextComp';
 import WrapperContainer from '@/components/WrapperContainer';
 import { useNavigation } from '@react-navigation/native';
@@ -85,6 +86,10 @@ const GivingSettings: React.FC = () => {
         titleStyle={styles.headerTitle}
       />
       <View style={styles.content}>
+        {isLoading ? (
+          <GivingSettingsShimmer />
+        ) : (
+          <>
         <TextComp text={t('settings.givingSettingsSubtitle')} style={styles.subtitle} />
 
         <View style={styles.card}>
@@ -141,10 +146,12 @@ const GivingSettings: React.FC = () => {
         <ButtonComp
           title={t('common.save')}
           onPress={handleSave}
-          loading={isSaving || isLoading}
-          disabled={isSaving || isLoading}
+          loading={isSaving}
+          disabled={isSaving}
           style={styles.saveButton}
         />
+          </>
+        )}
       </View>
     </WrapperContainer>
   );

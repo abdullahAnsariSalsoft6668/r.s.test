@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import {
-  ActivityIndicator,
   Alert,
   Image,
   Pressable,
@@ -26,6 +25,7 @@ import {
 import ButtonComp from '@/components/ButtonComp';
 import { FinanceCategoryPicker } from '@/components/finance';
 import HeaderComp from '@/components/HeaderComp';
+import { FormShimmer } from '@/components/shimmer';
 import MyIcons from '@/components/MyIcons';
 import { FadeInView, FinanceDateField, HelpBanner } from '@/components/rizqShare';
 import TextComp from '@/components/TextComp';
@@ -201,7 +201,7 @@ const AddExpense: React.FC = () => {
           iconColor={theme.colors.text.primary}
           titleStyle={styles.headerTitle}
         />
-        <ActivityIndicator color={expenseAccent} style={styles.loader} />
+        <FormShimmer />
       </WrapperContainer>
     );
   }

@@ -13,6 +13,7 @@
     "required": "Zaroori",
     "invalidAmount": "Sahi amount likhein",
     "errorGeneric": "Kuch ghalat ho gaya. Dobara koshish karein.",
+    "retry": "Dobara koshish karein",
     "addCustomCategory": "Custom category add karein",
     "customCategoryTitle": "Nayi category",
     "customCategoryName": "Category ka naam",
@@ -185,7 +186,9 @@
     "filterExpense": "Kharch",
     "filterDonation": "Sadqa",
     "addActionsTitle": "Naya entry add karein",
-    "editHint": "Kisi bhi entry ko edit karne ke liye Edit tap karein."
+    "editHint": "Kisi bhi entry ko edit karne ke liye Edit tap karein.",
+    "loadError": "Transactions load nahi ho sake",
+    "loadErrorHint": "Connection check karein aur dobara sign in karein, phir retry karein."
   },
   "analytics": {
     "title": "Analytics",

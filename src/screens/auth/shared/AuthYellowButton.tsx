@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    ActivityIndicator,
     I18nManager,
     Platform,
     Pressable,
@@ -14,6 +13,7 @@ import Svg, { Rect } from 'react-native-svg';
 
 import { plusJakarta } from '@/assets/fonts';
 import TextComp from '@/components/TextComp';
+import { ButtonShimmer } from '@/components/shimmer';
 import { palette } from '@/styles/palette';
 import { moderateScale } from '@/styles/scaling';
 
@@ -67,25 +67,30 @@ const AuthYellowButton: React.FC<AuthYellowButtonProps> = ({
         <Pressable
             onPress={onPress}
             disabled={disabled || loading}
-            style={[styles.button, (disabled || loading) && styles.buttonDisabled, style]}
+            style={[
+                styles.button,
+                disabled && !loading && styles.buttonDisabled,
+                loading && styles.buttonLoading,
+                style,
+            ]}
             accessibilityRole="button"
+            accessibilityState={{ disabled: disabled || loading, busy: loading }}
         >
-            <View style={styles.content}>
-                {leftIcon ? (
-                    <View style={styles.iconSlot}>{leftIcon}</View>
-                ) : showBarcodeIcon ? (
-                    <View style={styles.iconSlot}>
-                        <BarcodeIcon />
-                    </View>
-                ) : null}
-                <TextComp text={title} style={[styles.label, textStyle]} />
-                <Text style={styles.arrow}>{I18nManager.isRTL ? '←' : '→'}</Text>
-            </View>
             {loading ? (
-                <View style={styles.loaderOverlay}>
-                    <ActivityIndicator color={palette.neutral.text} />
+                <ButtonShimmer inverse={false} />
+            ) : (
+                <View style={styles.content}>
+                    {leftIcon ? (
+                        <View style={styles.iconSlot}>{leftIcon}</View>
+                    ) : showBarcodeIcon ? (
+                        <View style={styles.iconSlot}>
+                            <BarcodeIcon />
+                        </View>
+                    ) : null}
+                    <TextComp text={title} style={[styles.label, textStyle]} />
+                    <Text style={styles.arrow}>{I18nManager.isRTL ? '←' : '→'}</Text>
                 </View>
-            ) : null}
+            )}
         </Pressable>
         {helperText ? <TextComp text={helperText} style={styles.helperText} /> : null}
     </View>
@@ -100,6 +105,7 @@ const styles = StyleSheet.create({
         borderRadius: moderateScale(14),
         backgroundColor: palette.yellow.main,
         justifyContent: 'center',
+        alignItems: 'center',
         overflow: 'hidden',
         paddingVertical: moderateScale(14),
         paddingHorizontal: moderateScale(20),
@@ -118,6 +124,9 @@ const styles = StyleSheet.create({
     },
     buttonDisabled: {
         opacity: 0.65,
+    },
+    buttonLoading: {
+        opacity: 0.92,
     },
     content: {
         flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
@@ -149,12 +158,6 @@ const styles = StyleSheet.create({
         fontSize: moderateScale(12),
         color: palette.neutral.textSecondary,
         lineHeight: moderateScale(18),
-    },
-    loaderOverlay: {
-        ...StyleSheet.absoluteFill,
-        backgroundColor: 'rgba(255, 193, 7, 0.88)',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 });
 

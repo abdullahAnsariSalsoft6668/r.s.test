@@ -6,6 +6,7 @@ import { useAppTheme } from '@/context/ThemeContext';
 import { moderateScale } from '@/styles/scaling';
 
 export const TAB_ICON_SIZE = moderateScale(22);
+export const TAB_BAR_BOTTOM_GAP = moderateScale(8);
 
 export const useTabBarStyles = () => {
     const { theme } = useAppTheme();

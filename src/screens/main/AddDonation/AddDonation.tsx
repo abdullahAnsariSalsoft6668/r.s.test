@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { ActivityIndicator, Alert, Modal, Pressable, ScrollView, View } from 'react-native';
+import { Alert, Modal, Pressable, ScrollView, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -16,6 +16,7 @@ import {
 import { useGetRecipientsQuery } from '@/api/recipientApiSlice';
 import ButtonComp from '@/components/ButtonComp';
 import HeaderComp from '@/components/HeaderComp';
+import { FormShimmer } from '@/components/shimmer';
 import {
   EmptyState,
   FadeInView,
@@ -167,7 +168,7 @@ const AddDonation: React.FC = () => {
           iconColor={theme.colors.text.primary}
           titleStyle={styles.headerTitle}
         />
-        <ActivityIndicator color={theme.colors.brand.primary} style={styles.loader} />
+        <FormShimmer />
       </WrapperContainer>
     );
   }

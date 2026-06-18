@@ -13,6 +13,7 @@
     "required": "ضروری",
     "invalidAmount": "درست رقم درج کریں",
     "errorGeneric": "کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔",
+    "retry": "دوبارہ کوشش کریں",
     "addCustomCategory": "اپنی قسم شامل کریں",
     "customCategoryTitle": "نئی قسم",
     "customCategoryName": "قسم کا نام",
@@ -185,7 +186,9 @@
     "filterExpense": "خرچ",
     "filterDonation": "عطیہ",
     "addActionsTitle": "نیا اندراج شامل کریں",
-    "editHint": "کسی بھی اندراج میں ترمیم کے لیے ترمیم پر ٹیپ کریں۔"
+    "editHint": "کسی بھی اندراج میں ترمیم کے لیے ترمیم پر ٹیپ کریں۔",
+    "loadError": "لین دین لوڈ نہیں ہو سکے",
+    "loadErrorHint": "کنکشن چیک کریں اور دوبارہ سائن ان کریں، پھر دوبارہ کوشش کریں۔"
   },
   "analytics": {
     "title": "تجزیہ",

@@ -1,14 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
-import React from 'react';
-import { Linking, Pressable, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Linking, Pressable, Text, View } from 'react-native';
 import * as Yup from 'yup';
 
+import { signUpWithEmail } from '@/api/supabase/authService';
 import AuthPromptRow from '@/components/AuthPromptRow';
 import TextComp from '@/components/TextComp';
+import { USE_MOCK_FINANCE_API } from '@/config/supabase';
 import routes from '@/constants/routeNames';
 import { AuthStackParamList } from '@/navigation/types';
+import { loginSessionAction } from '@/redux/actions/auth';
 
 import AuthScreenLayout from '../shared/AuthScreenLayout';
 import AuthStaggerItem from '../shared/AuthStaggerItem';
@@ -19,8 +22,7 @@ import styles from './styles';
 
 const Register = () => {
     const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
-    // const [signUp, { isLoading }] = useSignUpMutation();
-    const isLoading = false;
+    const [isLoading, setIsLoading] = useState(false);
 
     const validationSchema = Yup.object().shape({
         fullName: Yup.string().trim().required('Required'),
@@ -32,14 +34,51 @@ const Register = () => {
         acceptedTerms: Yup.boolean().oneOf([true], 'Please accept the terms to continue'),
     });
 
-    const handleRegister = async (_values: {
+    const handleRegister = async (values: {
         fullName: string;
         email: string;
         password: string;
         confirmPassword: string;
         acceptedTerms: boolean;
     }) => {
-        navigation.navigate(routes.auth.login);
+        setIsLoading(true);
+        try {
+            if (USE_MOCK_FINANCE_API) {
+                await loginSessionAction({
+                    user: {
+                        email: values.email.trim(),
+                        fullName: values.fullName.trim(),
+                    },
+                    accessToken: 'alpha-static-token',
+                    refreshToken: 'alpha-static-refresh',
+                    setFirstTime: false,
+                });
+                return;
+            }
+
+            const data = await signUpWithEmail(
+                values.fullName,
+                values.email,
+                values.password,
+            );
+
+            if (data.session) {
+                return;
+            }
+
+            Alert.alert(
+                'Check your email',
+                'We sent a confirmation link. Sign in after confirming your account.',
+                [{ text: 'OK', onPress: () => navigation.navigate(routes.auth.login) }],
+            );
+        } catch (error) {
+            Alert.alert(
+                'Sign up failed',
+                error instanceof Error ? error.message : 'Could not create account',
+            );
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const openTermsPlaceholder = () => {

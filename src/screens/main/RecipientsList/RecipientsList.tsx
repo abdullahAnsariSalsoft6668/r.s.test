@@ -11,6 +11,7 @@ import {
 } from '@/api/recipientApiSlice';
 import ButtonComp from '@/components/ButtonComp';
 import HeaderComp from '@/components/HeaderComp';
+import { RecipientListShimmer } from '@/components/shimmer';
 import MyIcons from '@/components/MyIcons';
 import TextComp from '@/components/TextComp';
 import TextInputComp from '@/components/TextInputComp';
@@ -113,17 +114,19 @@ const RecipientsList: React.FC = () => {
           containerStyle={styles.searchInput}
         />
 
-        <FlatList
-          data={filteredRecipients}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItem}
-          contentContainerStyle={styles.list}
-          ListEmptyComponent={
-            !isLoading ? (
+        {isLoading ? (
+          <RecipientListShimmer />
+        ) : (
+          <FlatList
+            data={filteredRecipients}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+            contentContainerStyle={styles.list}
+            ListEmptyComponent={
               <TextComp text={t('recipient.empty')} style={styles.empty} />
-            ) : null
-          }
-        />
+            }
+          />
+        )}
       </View>
 
       <View style={styles.fab}>

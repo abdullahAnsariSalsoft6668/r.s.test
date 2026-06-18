@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { ActivityIndicator, Alert, ScrollView, Switch, View } from 'react-native';
+import { Alert, ScrollView, Switch, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Formik } from 'formik';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -17,6 +17,7 @@ import {
 import ButtonComp from '@/components/ButtonComp';
 import { FinanceCategoryPicker } from '@/components/finance';
 import HeaderComp from '@/components/HeaderComp';
+import { FormShimmer } from '@/components/shimmer';
 import { FadeInView, FinanceDateField, HelpBanner } from '@/components/rizqShare';
 import TextComp from '@/components/TextComp';
 import TextInputComp from '@/components/TextInputComp';
@@ -165,7 +166,7 @@ const AddIncome: React.FC = () => {
           iconColor={theme.colors.text.primary}
           titleStyle={styles.headerTitle}
         />
-        <ActivityIndicator color={theme.colors.brand.primary} style={styles.loader} />
+        <FormShimmer />
       </WrapperContainer>
     );
   }
@@ -276,17 +277,17 @@ const AddIncome: React.FC = () => {
 
             <FadeInView index={5}>
               <View style={styles.recurringRow}>
-              <View style={styles.recurringCopy}>
-                <TextComp text={t('income.recurring')} style={styles.recurringLabel} />
-                <TextComp text={t('income.recurringHint')} style={styles.recurringHint} />
+                <View style={styles.recurringCopy}>
+                  <TextComp text={t('income.recurring')} style={styles.recurringLabel} />
+                  <TextComp text={t('income.recurringHint')} style={styles.recurringHint} />
+                </View>
+                <Switch
+                  value={values.recurring}
+                  onValueChange={(value) => setFieldValue('recurring', value)}
+                  trackColor={{ false: theme.colors.border.default, true: theme.colors.brand.success }}
+                  thumbColor={theme.colors.card.background}
+                />
               </View>
-              <Switch
-                value={values.recurring}
-                onValueChange={(value) => setFieldValue('recurring', value)}
-                trackColor={{ false: theme.colors.border.default, true: theme.colors.brand.success }}
-                thumbColor={theme.colors.card.background}
-              />
-            </View>
             </FadeInView>
 
             <ButtonComp

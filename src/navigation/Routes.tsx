@@ -9,6 +9,7 @@ import { RootState } from '@/redux/store';
 import { useAppTheme } from '@/context/ThemeContext';
 
 import routes from '@/constants/routeNames';
+import { USE_MOCK_FINANCE_API } from '@/config/supabase';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const NavigationRoot = () => {
@@ -44,7 +45,7 @@ const NavigationRoot = () => {
                 }}
                 id={undefined}
             >
-                {true ? (
+                {USE_MOCK_FINANCE_API || isAuthenticated ? (
                     <Stack.Screen name={routes.navigator.main} component={MainStack} />
                 ) : (
                     <Stack.Screen name={routes.navigator.auth} component={AuthStack} />

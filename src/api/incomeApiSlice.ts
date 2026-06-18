@@ -1,4 +1,7 @@
-import { baseApi } from '@/api/baseApi';
+import { baseApi, invalidateAfterIncomeWrite } from '@/api/baseApi';
+import * as categoryService from '@/api/supabase/categoryService';
+import * as incomeService from '@/api/supabase/incomeService';
+import { USE_MOCK_FINANCE_API } from '@/config/supabase';
 import type { IncomeCategory, IncomeEntry } from '@/models/finance.types';
 
 import {
@@ -12,7 +15,9 @@ export const incomeApiSlice = baseApi.injectEndpoints({
     getIncomes: builder.query<IncomeEntry[], void>({
       queryFn: async () => {
         try {
-          const data = await incomeHandlers.getIncomes();
+          const data = USE_MOCK_FINANCE_API
+            ? await incomeHandlers.getIncomes()
+            : await incomeService.fetchIncomes();
           return { data };
         } catch (error) {
           return {
@@ -35,7 +40,9 @@ export const incomeApiSlice = baseApi.injectEndpoints({
     getIncomeCategories: builder.query<IncomeCategory[], void>({
       queryFn: async () => {
         try {
-          const data = await incomeHandlers.getIncomeCategories();
+          const data = USE_MOCK_FINANCE_API
+            ? await incomeHandlers.getIncomeCategories()
+            : await categoryService.fetchIncomeCategories();
           return { data };
         } catch (error) {
           return {
@@ -52,7 +59,9 @@ export const incomeApiSlice = baseApi.injectEndpoints({
     addIncome: builder.mutation<IncomeEntry, AddIncomePayload>({
       queryFn: async (payload) => {
         try {
-          const data = await incomeHandlers.addIncome(payload);
+          const data = USE_MOCK_FINANCE_API
+            ? await incomeHandlers.addIncome(payload)
+            : await incomeService.createIncome(payload);
           return { data };
         } catch (error) {
           return {
@@ -65,14 +74,16 @@ export const incomeApiSlice = baseApi.injectEndpoints({
       },
       invalidatesTags: [
         { type: 'Income', id: 'LIST' },
-        'Dashboard',
+        ...invalidateAfterIncomeWrite,
       ],
     }),
 
     updateIncome: builder.mutation<IncomeEntry, UpdateIncomePayload>({
-      queryFn: async (payload) => {
+      queryFn: async ({ id, ...patch }) => {
         try {
-          const data = await incomeHandlers.updateIncome(payload);
+          const data = USE_MOCK_FINANCE_API
+            ? await incomeHandlers.updateIncome({ id, ...patch })
+            : await incomeService.updateIncome(id, patch);
           return { data };
         } catch (error) {
           return {
@@ -86,14 +97,16 @@ export const incomeApiSlice = baseApi.injectEndpoints({
       invalidatesTags: (_result, _error, { id }) => [
         { type: 'Income', id },
         { type: 'Income', id: 'LIST' },
-        'Dashboard',
+        ...invalidateAfterIncomeWrite,
       ],
     }),
 
     deleteIncome: builder.mutation<{ id: string }, string>({
       queryFn: async (id) => {
         try {
-          const data = await incomeHandlers.deleteIncome(id);
+          const data = USE_MOCK_FINANCE_API
+            ? await incomeHandlers.deleteIncome(id)
+            : await incomeService.deleteIncome(id);
           return { data };
         } catch (error) {
           return {
@@ -107,14 +120,16 @@ export const incomeApiSlice = baseApi.injectEndpoints({
       invalidatesTags: (_result, _error, id) => [
         { type: 'Income', id },
         { type: 'Income', id: 'LIST' },
-        'Dashboard',
+        ...invalidateAfterIncomeWrite,
       ],
     }),
 
     addIncomeCategory: builder.mutation<IncomeCategory, string>({
       queryFn: async (name) => {
         try {
-          const data = await incomeHandlers.addIncomeCategory(name);
+          const data = USE_MOCK_FINANCE_API
+            ? await incomeHandlers.addIncomeCategory(name)
+            : await categoryService.createIncomeCategory(name);
           return { data };
         } catch (error) {
           return {

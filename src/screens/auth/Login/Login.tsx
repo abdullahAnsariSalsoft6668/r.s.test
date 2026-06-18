@@ -2,12 +2,14 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
-import { Pressable, TouchableOpacity, View } from 'react-native';
+import { Pressable, TouchableOpacity, View, Alert } from 'react-native';
 import * as Yup from 'yup';
 
 // import { useLoginMutation } from '@/api/authApiSlice';
 import AuthPromptRow from '@/components/AuthPromptRow';
 import TextComp from '@/components/TextComp';
+import { signInWithEmail } from '@/api/supabase/authService';
+import { USE_MOCK_FINANCE_API } from '@/config/supabase';
 import routes from '@/constants/routeNames';
 import { AuthStackParamList } from '@/navigation/types';
 import { loginSessionAction } from '@/redux/actions/auth';
@@ -22,7 +24,7 @@ import styles from './styles';
 const Login = () => {
     const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
     const [rememberMe, setRememberMe] = useState(false);
-    const isLoading = false;
+    const [isLoading, setIsLoading] = useState(false);
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -40,15 +42,30 @@ const Login = () => {
     });
 
     const handleLogin = async (values: { email: string; password: string }) => {
-        await loginSessionAction({
-            user: {
-                email: values.email.trim(),
-                fullName: 'Demo User',
-            },
-            accessToken: 'alpha-static-token',
-            refreshToken: 'alpha-static-refresh',
-            setFirstTime: false,
-        });
+        setIsLoading(true);
+        try {
+            if (USE_MOCK_FINANCE_API) {
+                await loginSessionAction({
+                    user: {
+                        email: values.email.trim(),
+                        fullName: 'Demo User',
+                    },
+                    accessToken: 'alpha-static-token',
+                    refreshToken: 'alpha-static-refresh',
+                    setFirstTime: false,
+                });
+                return;
+            }
+
+            await signInWithEmail(values.email.trim(), values.password);
+        } catch (error) {
+            Alert.alert(
+                'Login failed',
+                error instanceof Error ? error.message : 'Could not sign in',
+            );
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (

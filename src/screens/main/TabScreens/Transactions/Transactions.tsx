@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   StatusBar,
   View,
@@ -8,9 +7,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import type { NavigationProp } from '@react-navigation/native';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { useGetDashboardSummaryQuery, useGetTransactionsQuery } from '@/api/dashboardApiSlice';
 import { TabBodySheet, TabScreenHeader } from '@/components/grocery';
+import { TransactionListShimmer } from '@/components/shimmer';
 import ButtonComp from '@/components/ButtonComp';
 import {
   EmptyState,
@@ -31,6 +32,7 @@ import { useTabScreenStyles } from '@/hooks/useTabScreenStyles';
 import { useThemedStyles } from '@/hooks/useThemedStyles';
 
 import { createTransactionsStyles } from './styles';
+import { moderateScale } from '@/styles/scaling';
 
 type FilterKey = 'all' | TransactionType;
 
@@ -47,9 +49,23 @@ const Transactions: React.FC = () => {
   const { theme } = useAppTheme();
   const tabScreenStyles = useTabScreenStyles();
   const styles = useThemedStyles(createTransactionsStyles);
+  const tabBarHeight = useBottomTabBarHeight();
+  const listBottomPadding = tabBarHeight + moderateScale(112);
   const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
-  const { data: transactions = [], isLoading } = useGetTransactionsQuery();
+  const {
+    data: transactions = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useGetTransactionsQuery();
   const { data: summary } = useGetDashboardSummaryQuery();
+
+  const errorMessage =
+    error && typeof error === 'object' && 'error' in error
+      ? String((error as { error?: string }).error ?? '')
+      : t('transactions.loadError');
 
   const filtered = useMemo(() => {
     if (activeFilter === 'all') return transactions;
@@ -154,7 +170,8 @@ const Transactions: React.FC = () => {
     >
       <StatusBar barStyle="light-content" backgroundColor={theme.colors.background.header} />
       <TabScreenHeader title={t('tabs.transactions')} subtitle={t('transactions.subtitle')} />
-      <TabBodySheet style={styles.bodySheet}>
+      <View style={styles.content}>
+        <TabBodySheet style={styles.bodySheet}>
         <FadeInView index={0}>
           <SectionHeader
             title={t('transactions.title')}
@@ -180,14 +197,28 @@ const Transactions: React.FC = () => {
         </FadeInView>
 
         {isLoading ? (
-          <ActivityIndicator color={theme.colors.brand.primary} style={styles.loader} />
+          <TransactionListShimmer showFilters={false} />
+        ) : isError ? (
+          <EmptyState
+            title={t('transactions.loadError')}
+            subtitle={errorMessage || t('transactions.loadErrorHint')}
+            action={
+              <ButtonComp
+                title={t('common.retry')}
+                onPress={() => refetch()}
+                loading={isFetching}
+                size="m"
+                gradientColors={[theme.colors.brand.primary, theme.colors.brand.primaryDark]}
+              />
+            }
+          />
         ) : (
           <FlatList
             data={filtered}
             keyExtractor={(item) => `${item.type}-${item.id}`}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.listContent}
+            contentContainerStyle={[styles.listContent, { paddingBottom: listBottomPadding }]}
             ListHeaderComponent={
               filtered.length > 0 ? <HelpBanner message={t('transactions.editHint')} /> : null
             }
@@ -200,16 +231,17 @@ const Transactions: React.FC = () => {
             }
           />
         )}
-      </TabBodySheet>
+        </TabBodySheet>
 
-      <FloatingActionBar
-        title={t('transactions.addActionsTitle')}
-        actions={[
-          { label: t('income.addIncome'), onPress: openAddIncome, variant: 'income' },
-          { label: t('expense.addExpense'), onPress: openAddExpense, variant: 'expense' },
-          { label: t('donation.giveSadqa'), onPress: openAddDonation, variant: 'donate' },
-        ]}
-      />
+        <FloatingActionBar
+          title={t('transactions.addActionsTitle')}
+          actions={[
+            { label: t('income.addIncome'), onPress: openAddIncome, variant: 'income' },
+            { label: t('expense.addExpense'), onPress: openAddExpense, variant: 'expense' },
+            { label: t('donation.giveSadqa'), onPress: openAddDonation, variant: 'donate' },
+          ]}
+        />
+      </View>
     </WrapperContainer>
   );
 };

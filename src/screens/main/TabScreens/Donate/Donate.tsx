@@ -1,10 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import {
-  ActivityIndicator,
-  ScrollView,
-  StatusBar,
-  View,
-} from 'react-native';
+import { ScrollView, StatusBar, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import type { NavigationProp } from '@react-navigation/native';
@@ -14,6 +9,7 @@ import { useGetDonationsQuery } from '@/api/donationApiSlice';
 import { useGetDashboardSummaryQuery } from '@/api/dashboardApiSlice';
 import { useGetRecipientsQuery } from '@/api/recipientApiSlice';
 import { TabBodySheet, TabScreenHeader } from '@/components/grocery';
+import { DonateShimmer } from '@/components/shimmer';
 import ButtonComp from '@/components/ButtonComp';
 import {
   DonationProgressBar,
@@ -109,7 +105,7 @@ const Donate: React.FC = () => {
       >
         <TabBodySheet>
           {isLoading || !summary ? (
-            <ActivityIndicator color={theme.colors.brand.primary} style={styles.loader} />
+            <DonateShimmer />
           ) : (
             <>
               <FadeInView index={0}>

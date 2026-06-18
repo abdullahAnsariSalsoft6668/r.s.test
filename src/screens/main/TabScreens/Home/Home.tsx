@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StatusBar, View } from 'react-native';
+import { Pressable, ScrollView, StatusBar, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import type { NavigationProp } from '@react-navigation/native';
@@ -10,6 +10,7 @@ import {
   useGetUserNameQuery,
 } from '@/api/dashboardApiSlice';
 import { TabBodySheet, TabScreenHeader } from '@/components/grocery';
+import { DashboardShimmer } from '@/components/shimmer';
 import ButtonComp from '@/components/ButtonComp';
 import {
   ActionCard,
@@ -99,7 +100,7 @@ const Home: React.FC = () => {
       >
         <TabBodySheet>
           {isLoading || !summary ? (
-            <ActivityIndicator color={theme.colors.brand.primary} style={styles.loader} />
+            <DashboardShimmer />
           ) : (
             <>
               <FadeInView index={0}>

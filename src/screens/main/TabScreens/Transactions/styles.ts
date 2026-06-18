@@ -6,6 +6,10 @@ import { moderateScale } from '@/styles/scaling';
 
 export const createTransactionsStyles = (theme: AppTheme) =>
   StyleSheet.create({
+    content: {
+      flex: 1,
+      position: 'relative',
+    },
     bodySheet: {
       flex: 1,
     },
@@ -40,7 +44,6 @@ export const createTransactionsStyles = (theme: AppTheme) =>
       marginTop: moderateScale(40),
     },
     listContent: {
-      paddingBottom: moderateScale(160),
       flexGrow: 1,
     },
     emptyActions: {

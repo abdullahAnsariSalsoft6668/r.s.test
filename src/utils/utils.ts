@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from "axios";
-import { secureStorage } from "./secureStorage";
+import { secureStorage } from "@/storage";
 
 // Define API response interface
 interface ApiResponse<T = any> {

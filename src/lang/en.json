@@ -13,6 +13,7 @@
     "required": "Required",
     "invalidAmount": "Enter a valid amount",
     "errorGeneric": "Something went wrong. Please try again.",
+    "retry": "Try again",
     "addCustomCategory": "Add custom category",
     "customCategoryTitle": "New category",
     "customCategoryName": "Category name",
@@ -193,7 +194,9 @@
     "filterExpense": "Expense",
     "filterDonation": "Donation",
     "addActionsTitle": "Add a new entry",
-    "editHint": "Tap Edit to change any entry."
+    "editHint": "Tap Edit to change any entry.",
+    "loadError": "Could not load transactions",
+    "loadErrorHint": "Check your connection and sign in again, then retry."
   },
   "analytics": {
     "title": "Analytics",

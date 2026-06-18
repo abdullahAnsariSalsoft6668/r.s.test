@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import TextComp from '@/components/TextComp';
 import { plusJakarta } from '@/assets/fonts';
@@ -64,18 +65,28 @@ const getVariantColors = (
 
 const FloatingActionBar: React.FC<FloatingActionBarProps> = ({ title, actions }) => {
   const { theme, isDark } = useAppTheme();
+  const tabBarHeight = useBottomTabBarHeight();
+  const bottomOffset = tabBarHeight + moderateScale(8);
   const variantColors = useMemo(() => getVariantColors(theme, isDark), [theme, isDark]);
   const styles = useMemo(
     () =>
       StyleSheet.create({
         outer: {
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          zIndex: 20,
           backgroundColor: theme.colors.card.background,
           borderTopWidth: 1,
           borderTopColor: theme.colors.border.subtle,
           paddingHorizontal: moderateScale(12),
           paddingTop: moderateScale(12),
-          paddingBottom: moderateScale(8),
+          paddingBottom: moderateScale(10),
           ...theme.shadows.card,
+          ...Platform.select({
+            android: { elevation: 12 },
+            default: {},
+          }),
         },
         title: {
           fontFamily: plusJakarta.bold,
@@ -107,7 +118,7 @@ const FloatingActionBar: React.FC<FloatingActionBarProps> = ({ title, actions })
   );
 
   return (
-    <View style={styles.outer}>
+    <View style={[styles.outer, { bottom: bottomOffset }]} pointerEvents="box-none">
       {title ? <TextComp text={title} style={styles.title} /> : null}
       <View style={styles.row}>
         {actions.map((action) => {

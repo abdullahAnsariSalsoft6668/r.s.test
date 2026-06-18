@@ -1,6 +1,7 @@
 // import { useVerifyCodeMutation, useVerifyEmailMutation } from '@/api/resetPassApiSlice';
 import AuthPromptRow from '@/components/AuthPromptRow';
 import TextComp from '@/components/TextComp';
+import { AppShimmerBox } from '@/components/shimmer';
 import routes from '@/constants/routeNames';
 import type { AuthStackParamList } from '@/navigation/types';
 import { palette } from '@/styles/palette';
@@ -9,7 +10,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { OtpInput } from 'react-native-otp-entry';
 import * as Yup from 'yup';
 
@@ -145,7 +146,14 @@ const ForgotVerifyOtp: React.FC = () => {
                                     accessibilityLabel="Resend verification code"
                                 >
                                     {isResending ? (
-                                        <ActivityIndicator color={palette.purple.main} />
+                                        <AppShimmerBox
+                                            variant="onCard"
+                                            style={{
+                                                width: moderateScale(88),
+                                                height: moderateScale(10),
+                                                borderRadius: moderateScale(5),
+                                            }}
+                                        />
                                     ) : (
                                         <TextComp text="Resend code?" style={styles.resendText} />
                                     )}

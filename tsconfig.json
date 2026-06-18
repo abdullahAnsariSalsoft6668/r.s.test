@@ -5,8 +5,16 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["jest"]
+    "types": ["jest"],
+    "jsx": "react-native",
+    "moduleResolution": "bundler",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "App.jsx"],
-  "exclude": ["**/node_modules", "**/Pods"]
+  "exclude": ["**/node_modules", "**/Pods", "src/customscripts"]
 }

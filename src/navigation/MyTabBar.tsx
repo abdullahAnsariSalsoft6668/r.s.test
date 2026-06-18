@@ -2,7 +2,8 @@ import MyIcons, { IconName } from '@/components/MyIcons';
 import TextComp from '@/components/TextComp';
 import routes from '@/constants/routeNames';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import React, { useEffect } from 'react';
+import { BottomTabBarHeightCallbackContext } from '@react-navigation/bottom-tabs';
+import React, { useContext, useEffect } from 'react';
 import { View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -13,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ScalePressable from '@/components/rizqShare/ScalePressable';
-import { useTabBarStyles, TAB_ICON_SIZE } from '@/hooks/useTabBarStyles';
+import { useTabBarStyles, TAB_ICON_SIZE, TAB_BAR_BOTTOM_GAP } from '@/hooks/useTabBarStyles';
 import { useAppTheme } from '@/context/ThemeContext';
 
 type TabConfig = {
@@ -146,11 +147,15 @@ const MyTabBar = ({ state, descriptors, navigation }: BottomTabBarProps) => {
     const insets = useSafeAreaInsets();
     const { t } = useTranslation();
     const { tabBarStyles } = useTabBarStyles();
+    const onHeightChange = useContext(BottomTabBarHeightCallbackContext);
 
     return (
         <View
             style={[tabBarStyles.outer, { paddingBottom: Math.max(insets.bottom, 10) }]}
             pointerEvents="box-none"
+            onLayout={(event) => {
+                onHeightChange?.(event.nativeEvent.layout.height + TAB_BAR_BOTTOM_GAP);
+            }}
         >
             <View style={tabBarStyles.bar}>
                 <View style={tabBarStyles.tabsRow}>

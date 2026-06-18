@@ -1,4 +1,7 @@
-import { baseApi } from '@/api/baseApi';
+import { baseApi, invalidateAfterExpenseWrite } from '@/api/baseApi';
+import * as categoryService from '@/api/supabase/categoryService';
+import * as expenseService from '@/api/supabase/expenseService';
+import { USE_MOCK_FINANCE_API } from '@/config/supabase';
 import type { ExpenseCategory, ExpenseEntry } from '@/models/finance.types';
 
 import {
@@ -12,7 +15,9 @@ export const expenseApiSlice = baseApi.injectEndpoints({
     getExpenses: builder.query<ExpenseEntry[], void>({
       queryFn: async () => {
         try {
-          const data = await expenseHandlers.getExpenses();
+          const data = USE_MOCK_FINANCE_API
+            ? await expenseHandlers.getExpenses()
+            : await expenseService.fetchExpenses();
           return { data };
         } catch (error) {
           return {
@@ -35,7 +40,9 @@ export const expenseApiSlice = baseApi.injectEndpoints({
     getExpenseCategories: builder.query<ExpenseCategory[], void>({
       queryFn: async () => {
         try {
-          const data = await expenseHandlers.getExpenseCategories();
+          const data = USE_MOCK_FINANCE_API
+            ? await expenseHandlers.getExpenseCategories()
+            : await categoryService.fetchExpenseCategories();
           return { data };
         } catch (error) {
           return {
@@ -52,7 +59,9 @@ export const expenseApiSlice = baseApi.injectEndpoints({
     addExpense: builder.mutation<ExpenseEntry, AddExpensePayload>({
       queryFn: async (payload) => {
         try {
-          const data = await expenseHandlers.addExpense(payload);
+          const data = USE_MOCK_FINANCE_API
+            ? await expenseHandlers.addExpense(payload)
+            : await expenseService.createExpense(payload);
           return { data };
         } catch (error) {
           return {
@@ -65,14 +74,16 @@ export const expenseApiSlice = baseApi.injectEndpoints({
       },
       invalidatesTags: [
         { type: 'Expense', id: 'LIST' },
-        'Dashboard',
+        ...invalidateAfterExpenseWrite,
       ],
     }),
 
     updateExpense: builder.mutation<ExpenseEntry, UpdateExpensePayload>({
-      queryFn: async (payload) => {
+      queryFn: async ({ id, ...patch }) => {
         try {
-          const data = await expenseHandlers.updateExpense(payload);
+          const data = USE_MOCK_FINANCE_API
+            ? await expenseHandlers.updateExpense({ id, ...patch })
+            : await expenseService.updateExpense(id, patch);
           return { data };
         } catch (error) {
           return {
@@ -86,14 +97,16 @@ export const expenseApiSlice = baseApi.injectEndpoints({
       invalidatesTags: (_result, _error, { id }) => [
         { type: 'Expense', id },
         { type: 'Expense', id: 'LIST' },
-        'Dashboard',
+        ...invalidateAfterExpenseWrite,
       ],
     }),
 
     deleteExpense: builder.mutation<{ id: string }, string>({
       queryFn: async (id) => {
         try {
-          const data = await expenseHandlers.deleteExpense(id);
+          const data = USE_MOCK_FINANCE_API
+            ? await expenseHandlers.deleteExpense(id)
+            : await expenseService.deleteExpense(id);
           return { data };
         } catch (error) {
           return {
@@ -107,14 +120,16 @@ export const expenseApiSlice = baseApi.injectEndpoints({
       invalidatesTags: (_result, _error, id) => [
         { type: 'Expense', id },
         { type: 'Expense', id: 'LIST' },
-        'Dashboard',
+        ...invalidateAfterExpenseWrite,
       ],
     }),
 
     addExpenseCategory: builder.mutation<ExpenseCategory, string>({
       queryFn: async (name) => {
         try {
-          const data = await expenseHandlers.addExpenseCategory(name);
+          const data = USE_MOCK_FINANCE_API
+            ? await expenseHandlers.addExpenseCategory(name)
+            : await categoryService.createExpenseCategory(name);
           return { data };
         } catch (error) {
           return {
@@ -131,7 +146,9 @@ export const expenseApiSlice = baseApi.injectEndpoints({
     uploadReceipt: builder.mutation<{ receiptUri: string }, string>({
       queryFn: async (uri) => {
         try {
-          const data = await expenseHandlers.uploadReceipt(uri);
+          const data = USE_MOCK_FINANCE_API
+            ? await expenseHandlers.uploadReceipt(uri)
+            : await expenseService.uploadReceipt(uri);
           return { data };
         } catch (error) {
           return {

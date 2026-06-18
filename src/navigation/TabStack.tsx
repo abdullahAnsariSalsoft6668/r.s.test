@@ -13,6 +13,12 @@ export const BottomTabs = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          position: 'absolute',
+          backgroundColor: 'transparent',
+          borderTopWidth: 0,
+          elevation: 0,
+        },
         sceneStyle: {
           flex: 1,
           backgroundColor: theme.colors.background.primary,

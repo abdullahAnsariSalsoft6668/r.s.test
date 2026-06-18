@@ -1,4 +1,4 @@
-import { secureStorage } from '@/utils/secureStorage';
+import { mmkvStorage, secureStorage } from '@/storage';
 import type { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 import { AuthorizationStatus, getMessaging, getToken, requestPermission } from '@react-native-firebase/messaging';
 
@@ -13,18 +13,17 @@ function getMessagingInstance(): FirebaseMessagingTypes.Module | null {
 
 const getFCMToken = async (messagingInstance: FirebaseMessagingTypes.Module) => {
   try {
-    const fcmToken = await secureStorage.getItem('FCM_TOKEN');
-    console.log('fcmToken', fcmToken);
-    if (!!fcmToken) {
-      return fcmToken;
+    const cached = mmkvStorage.getItem('FCM_TOKEN');
+    if (cached) {
+      return cached;
     }
     const token = await getToken(messagingInstance);
-    if (!!token) {
-      await secureStorage.setItem('FCM_TOKEN', token);
+    if (token) {
+      mmkvStorage.setItem('FCM_TOKEN', token);
     }
     return token;
-  } catch (error) {
-    console.log('error during generating token', error);
+  } catch {
+    return undefined;
   }
 };
 
@@ -34,13 +33,11 @@ export async function requestUserPermission() {
     if (!messagingInstance) return;
 
     const authStatus = await requestPermission(messagingInstance);
-    console.log('authStatus', authStatus);
     const enabled =
       authStatus === AuthorizationStatus.AUTHORIZED ||
       authStatus === AuthorizationStatus.PROVISIONAL;
 
     if (enabled) {
-      console.log('Authorization status:', authStatus);
       getFCMToken(messagingInstance);
     }
   } catch (error) {

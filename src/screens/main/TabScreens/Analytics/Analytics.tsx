@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
-import { ActivityIndicator, ScrollView, StatusBar, View } from 'react-native';
+import { ScrollView, StatusBar, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useGetAnalyticsQuery } from '@/api/analyticsApiSlice';
 import { TabBodySheet, TabScreenHeader } from '@/components/grocery';
+import { AnalyticsShimmer } from '@/components/shimmer';
 import { EmptyState, FadeInView } from '@/components/rizqShare';
 import TextComp from '@/components/TextComp';
 import WrapperContainer from '@/components/WrapperContainer';
@@ -53,7 +54,7 @@ const Analytics: React.FC = () => {
       >
         <TabBodySheet>
           {isLoading ? (
-            <ActivityIndicator color={theme.colors.brand.primary} style={styles.loader} />
+            <AnalyticsShimmer />
           ) : !hasData ? (
             <EmptyState title={t('analytics.empty')} subtitle={t('analytics.emptyHint')} />
           ) : (

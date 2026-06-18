@@ -1,90 +1,94 @@
 /**
  * @file checkStorage.ts
- * @description Utility functions for managing and retrieving persisted application state from secure storage.
- * This module is responsible for initializing the app with user preferences stored in secure storage.
+ * @description Initializes Redux from MMKV (preferences) and Keychain (auth session).
  */
 
-import { hydrateAuthFromSecureStorage } from "@/redux/actions/auth";
-import { changeFirstTime } from "@/redux/reducers/auth";
-import { LanguageInterface, saveDefaultCurrency, saveDefaultLanguage, saveDefaultTheme } from "@/redux/reducers/settings";
-import store from "@/redux/store";
-import i18n, { isRtlLocale } from "@/lang";
-import { isAppCurrency, DEFAULT_CURRENCY } from "@/constants/currency";
-import { mockStore } from "@/api/mock/mockStore";
-import { syncRtlWithLocale } from "@/utils/rtl";
-import { I18nManager } from "react-native";
-import { secureStorage } from "./secureStorage";
+import { restoreSupabaseSession } from '@/api/supabase/authService';
+import { USE_MOCK_FINANCE_API } from '@/config/supabase';
+import { hydrateAuthFromSecureStorage } from '@/redux/actions/auth';
+import { changeFirstTime, clearData } from '@/redux/reducers/auth';
+import {
+  LanguageInterface,
+  saveDefaultCurrency,
+  saveDefaultLanguage,
+  saveDefaultTheme,
+} from '@/redux/reducers/settings';
+import store from '@/redux/store';
+import i18n, { isRtlLocale } from '@/lang';
+import { isAppCurrency, DEFAULT_CURRENCY } from '@/constants/currency';
+import { mockStore } from '@/api/mock/mockStore';
+import { mmkvStorage, runStorageMigrationIfNeeded, secureStorage, clearAuthSession } from '@/storage';
+import { syncRtlWithLocale } from '@/utils/rtl';
+import { I18nManager } from 'react-native';
+
 const { dispatch } = store;
 
-/**
- * Retrieves persisted application state from secure storage and initializes the Redux store.
- * 
- * @async
- * @function getLocalItem
- * @description This function runs at application startup to:
- *  1. Check if the app is running for the first time
- *  2. Load and apply the user's preferred language
- *  3. Load and apply the user's preferred theme
- * 
- * @throws {Error} Will log any errors encountered during retrieval or dispatch
- * @returns {Promise<void>}
- * 
- * @example
- * // Called in App.tsx useEffect
- * getLocalItem();
- */
-export const getLocalItem = async () => {
-    try {
-        await hydrateAuthFromSecureStorage();
+const DEMO_ACCESS_TOKEN = 'alpha-static-token';
+const DEMO_REFRESH_TOKEN = 'alpha-static-refresh';
 
-        // Check if this is the first time the app has been run
-        const isFirstTimeStored = await secureStorage.getItem('IS_FIRST_TIME');
-
-        console.log('isFirstTime', isFirstTimeStored);
-
-        // Fresh install → show onboarding; persisted 'false' → go straight to login.
-        dispatch(changeFirstTime(isFirstTimeStored === null || isFirstTimeStored === 'true'));
-
-        const language = await secureStorage.getObject<LanguageInterface>('LANGUAGE');
-        console.log('language', language);
-
-        const theme = await secureStorage.getItem('THEME');
-        console.log('theme', theme);
-
-        const currency = await secureStorage.getItem('CURRENCY');
-        console.log('currency', currency);
-
-        const locale = language?.sortName ?? 'en';
-
-        // Apply RTL layout before first render based on saved language
-        syncRtlWithLocale(locale);
-
-        // Apply saved language if it exists
-        if (language) {
-            await i18n.changeLanguage(locale);
-            dispatch(saveDefaultLanguage(language));
-        } else {
-            I18nManager.allowRTL(isRtlLocale('en'));
-            I18nManager.forceRTL(false);
-            await i18n.changeLanguage('en');
-        }
-
-        // Apply saved theme if it exists, otherwise set default dark theme
-        if (theme) {
-            dispatch(saveDefaultTheme({ myTheme: theme }));
-        } else {
-            const defaultTheme = 'dark';
-            await secureStorage.setItem('THEME', defaultTheme);
-            dispatch(saveDefaultTheme({ myTheme: defaultTheme }));
-        }
-
-        const resolvedCurrency = currency && isAppCurrency(currency) ? currency : DEFAULT_CURRENCY;
-        mockStore.setPreferredCurrency(resolvedCurrency);
-        dispatch(saveDefaultCurrency(resolvedCurrency));
-        if (!currency || !isAppCurrency(currency)) {
-            await secureStorage.setItem('CURRENCY', resolvedCurrency);
-        }
-    } catch (error) {
-        console.log(error);
-    }
+async function clearStaleAuthSession(): Promise<void> {
+  await clearAuthSession();
+  dispatch(clearData());
 }
+
+export const getLocalItem = async () => {
+  try {
+    await runStorageMigrationIfNeeded();
+    await hydrateAuthFromSecureStorage();
+
+    if (!USE_MOCK_FINANCE_API) {
+      const accessToken = (await secureStorage.getItem('AUTH_TOKEN')) ?? '';
+      const refreshToken = (await secureStorage.getItem('REFRESH_TOKEN')) ?? '';
+
+      if (
+        accessToken === DEMO_ACCESS_TOKEN ||
+        refreshToken === DEMO_REFRESH_TOKEN
+      ) {
+        await clearStaleAuthSession();
+      } else if (accessToken && refreshToken) {
+        try {
+          await restoreSupabaseSession(accessToken, refreshToken);
+        } catch (sessionError) {
+          console.log('[checkStorage] supabase session restore failed', sessionError);
+          await clearStaleAuthSession();
+        }
+      }
+    }
+
+    const isFirstTimeStored = mmkvStorage.getItem('IS_FIRST_TIME');
+    dispatch(changeFirstTime(isFirstTimeStored === undefined || isFirstTimeStored === 'true'));
+
+    const language = mmkvStorage.getObject<LanguageInterface>('LANGUAGE');
+    const theme = mmkvStorage.getItem('THEME');
+    const currency = mmkvStorage.getItem('CURRENCY');
+    const locale = language?.sortName ?? 'en';
+
+    syncRtlWithLocale(locale);
+
+    if (language) {
+      await i18n.changeLanguage(locale);
+      dispatch(saveDefaultLanguage(language));
+    } else {
+      I18nManager.allowRTL(isRtlLocale('en'));
+      I18nManager.forceRTL(false);
+      await i18n.changeLanguage('en');
+    }
+
+    if (theme) {
+      dispatch(saveDefaultTheme({ myTheme: theme }));
+    } else {
+      const defaultTheme = 'dark';
+      mmkvStorage.setItem('THEME', defaultTheme);
+      dispatch(saveDefaultTheme({ myTheme: defaultTheme }));
+    }
+
+    const resolvedCurrency = currency && isAppCurrency(currency) ? currency : DEFAULT_CURRENCY;
+    mockStore.setPreferredCurrency(resolvedCurrency);
+    dispatch(saveDefaultCurrency(resolvedCurrency));
+    if (!currency || !isAppCurrency(currency)) {
+      mmkvStorage.setItem('CURRENCY', resolvedCurrency);
+    }
+  } catch (error) {
+    console.log('[checkStorage] bootstrap failed');
+  }
+};

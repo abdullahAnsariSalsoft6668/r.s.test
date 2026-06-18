@@ -1,5 +1,7 @@
 import { baseApi, mockDelay } from '@/api/baseApi';
 import { mockStore } from '@/api/mock/mockStore';
+import * as recipientService from '@/api/supabase/recipientService';
+import { USE_MOCK_FINANCE_API } from '@/config/supabase';
 import type { Recipient, RelationshipType } from '@/models/finance.types';
 
 export type CreateRecipientPayload = Omit<Recipient, 'id'>;
@@ -9,8 +11,21 @@ export const recipientApiSlice = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getRecipients: builder.query<Recipient[], void>({
       queryFn: async () => {
-        await mockDelay();
-        return { data: mockStore.getRecipients() };
+        try {
+          if (USE_MOCK_FINANCE_API) {
+            await mockDelay();
+            return { data: mockStore.getRecipients() };
+          }
+          const data = await recipientService.fetchRecipients();
+          return { data };
+        } catch (error) {
+          return {
+            error: {
+              status: 'CUSTOM_ERROR',
+              error: error instanceof Error ? error.message : 'Failed to load recipients',
+            },
+          };
+        }
       },
       providesTags: (result) =>
         result
@@ -22,20 +37,40 @@ export const recipientApiSlice = baseApi.injectEndpoints({
     }),
     addRecipient: builder.mutation<Recipient, CreateRecipientPayload>({
       queryFn: async (payload) => {
-        await mockDelay();
-        const data = mockStore.addRecipient(payload);
-        return { data };
+        try {
+          const data = USE_MOCK_FINANCE_API
+            ? (await mockDelay(), mockStore.addRecipient(payload))
+            : await recipientService.createRecipient(payload);
+          return { data };
+        } catch (error) {
+          return {
+            error: {
+              status: 'CUSTOM_ERROR',
+              error: error instanceof Error ? error.message : 'Failed to add recipient',
+            },
+          };
+        }
       },
       invalidatesTags: [{ type: 'Recipient', id: 'LIST' }],
     }),
     updateRecipient: builder.mutation<Recipient, UpdateRecipientPayload>({
       queryFn: async ({ id, data: payload }) => {
-        await mockDelay();
         try {
-          const data = mockStore.updateRecipient(id, payload);
+          if (USE_MOCK_FINANCE_API) {
+            await mockDelay();
+            const data = mockStore.updateRecipient(id, payload);
+            return { data };
+          }
+          const data = await recipientService.updateRecipient(id, payload);
           return { data };
-        } catch {
-          return { error: { status: 404, data: 'Recipient not found' } };
+        } catch (error) {
+          return {
+            error: {
+              status: 'CUSTOM_ERROR',
+              error:
+                error instanceof Error ? error.message : 'Failed to update recipient',
+            },
+          };
         }
       },
       invalidatesTags: (_result, _error, { id }) => [
@@ -45,9 +80,19 @@ export const recipientApiSlice = baseApi.injectEndpoints({
     }),
     deleteRecipient: builder.mutation<{ success: true }, string>({
       queryFn: async (id) => {
-        await mockDelay();
-        mockStore.deleteRecipient(id);
-        return { data: { success: true } };
+        try {
+          const data = USE_MOCK_FINANCE_API
+            ? (await mockDelay(), mockStore.deleteRecipient(id), { success: true as const })
+            : await recipientService.deleteRecipient(id);
+          return { data };
+        } catch (error) {
+          return {
+            error: {
+              status: 'CUSTOM_ERROR',
+              error: error instanceof Error ? error.message : 'Failed to delete recipient',
+            },
+          };
+        }
       },
       invalidatesTags: (_result, _error, id) => [
         { type: 'Recipient', id },
